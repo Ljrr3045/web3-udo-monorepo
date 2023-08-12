@@ -1,0 +1,15 @@
+{
+    "name": "web3-udo-monorepo",
+    "version": "1.0.0",
+    "private": false,
+    "description": "Monorepo of UDOT project",
+    "license": "ISC",
+    "scripts": {
+        "bootstrap": "npm install && npm run install:pkgs",
+        "clean": "lerna exec rm -- -rf node_modules",
+        "install:pkgs": "lerna exec npm install -- --also=dev"
+    },
+    "dependencies": {
+        "lerna": "7.1.5"
+    }
+}
