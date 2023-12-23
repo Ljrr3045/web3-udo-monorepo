@@ -33,6 +33,10 @@ describe("Lock", function () {
       expect(await lock.unlockTime()).to.equal(unlockTime);
     });
 
+    it("test", async function () {
+      expect(1).to.equal(1);
+    });
+
     it("Should set the right owner", async function () {
       const { lock, owner } = await loadFixture(deployOneYearLockFixture);
 

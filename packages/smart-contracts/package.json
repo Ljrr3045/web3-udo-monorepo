@@ -1,6 +1,17 @@
 {
+  "name": "smart-contracts",
   "devDependencies": {
+    "@nomiclabs/hardhat-etherscan": "^3.1.0",
     "@nomicfoundation/hardhat-toolbox": "^4.0.0",
-    "hardhat": "^2.19.3"
+    "dotenv": "^16.3.1",
+    "hardhat": "^2.19.3",
+    "hardhat-gas-reporter": "^1.0.9",
+    "solidity-coverage": "^0.8.5"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^5.0.1",
+    "@uniswap/v2-core": "^1.0.1",
+    "@uniswap/v2-periphery": "^1.1.0-beta.0",
+    "solidity-docgen": "^0.6.0-beta.36"
   }
 }
