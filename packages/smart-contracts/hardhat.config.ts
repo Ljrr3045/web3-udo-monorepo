@@ -4,6 +4,8 @@ import "hardhat-gas-reporter";
 import "solidity-coverage";
 import "solidity-docgen";
 
+require("dotenv").config();
+
 const config: HardhatUserConfig = {
   solidity: {
     version: "0.8.20",
@@ -18,7 +20,7 @@ const config: HardhatUserConfig = {
     hardhat: {
       forking: {
         url: process.env.POLYGON_MAINNET_URL ?? "",
-        blockNumber: 35609317,
+        blockNumber: 51478507,
       }
     },
     mumbai: {
