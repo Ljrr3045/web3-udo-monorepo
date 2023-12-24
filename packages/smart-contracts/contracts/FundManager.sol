@@ -72,7 +72,7 @@ contract FundManager is UDOT {
 
     modifier beforeVote() {
         require(!_isWalletAlreadyVoted(_msgSender()), "FundManager: The wallet already voted");
-        require(balanceOf(_msgSender()) >= MINIMUM_AMOUNT_TO_VOTE, "FundManager: The wallet is not UDOT holder");
+        require(balanceOf(_msgSender()) >= MINIMUM_AMOUNT_TO_VOTE, "FundManager: Only UDOT holders can vote");
         _;
     }
 
@@ -300,7 +300,9 @@ contract FundManager is UDOT {
      * @notice Allows to clean the wallets that already voted
     */
     function _cleanWalletsAlreadyVoted() internal {
-        for (uint256 i = 0; i < walletsAlreadyVoted.length; i++) {
+        uint256 _totalWalletsAlreadyVoted = walletsAlreadyVoted.length;
+
+        for (uint256 i = 0; i < _totalWalletsAlreadyVoted; i++) {
             walletsAlreadyVoted.pop();
         }
     }
