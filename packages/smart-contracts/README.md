@@ -32,31 +32,38 @@ The UDOT token is an ERC20 utility token. This can can be used as a digital curr
 ## Technologies and protocols used
 
 This project uses the following technologies and protocols:
-* [Solidity](https://docs.soliditylang.org/en/v0.8.17/)
+* [Solidity](https://docs.soliditylang.org/en/v0.8.23/)
+* [Typescript](https://www.typescriptlang.org/docs/)
 * [Hardhat](https://hardhat.org/docs)
 * [OpenZeppelin](https://docs.openzeppelin.com/)
-* [Polygon](https://bscscan.com/) 
+* [Polygon](https://docs.polygon.technology/) 
 
 ## Documentation
 
 The information on smart contracts can be found at the following link:
 * [Documentation](https://github.com/Ljrr3045/udo-erc20-token/blob/master/docs/index.md)
 
-You can verify the contract in the Polygon network at the following link:
-* [Contract verified in polygon](https://polygonscan.com/token/0xEc969d8308F5a9BE1C473CCDE957f08aa48Cfc64)
+You can verify the contract in the Mumbai testnet network at the following link:
+* [Contract verified](https://polygonscan.com/token/0xEc969d8308F5a9BE1C473CCDE957f08aa48Cfc64)
 
 ## Useful commands
 
 ```
 # Compile contracts
-npx hardhat compile
+npm run compile
 
 # Run tests
-npx hardhat test (or npx hardhat coverage)
+npm run test
 
-# Run deploy script
-npm run contract:deploy
+# Run Coverage
+npm run coverage
+
+# Run deploy on local network
+npm run deploy:local
+
+# Run deploy on testnet network
+npm run deploy:testnet
 
 # Generate documentation
-npx hardhat docgen
+npm run docgen
 ```

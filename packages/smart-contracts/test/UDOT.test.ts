@@ -21,7 +21,7 @@ describe("UDOT", function () {
 
         await network.provider.send("hardhat_setBalance", [
             user1.address,
-            ethers.encodeBytes32String("1000000000000000000000000"),
+            ethers.encodeBytes32String(ethers.parseEther("10000000").toString()),
         ]);
 
         return { udot, erc20Mock, owner, user1, user2 };
