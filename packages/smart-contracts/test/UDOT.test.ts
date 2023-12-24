@@ -118,18 +118,6 @@ describe("UDOT", function () {
             expect(await udot.connect(owner).balanceOf(await udot.getAddress())).to.equal(ethers.parseEther("20"));
         });
 
-        it("If users are whitelisted, they do not pay taxes", async ()=> {
-            const { udot, owner, user1, user2 } = await loadFixture(deployContract);
-
-            await udot.connect(owner).whiteList(user1.address, true);
-            await udot.connect(owner).whiteList(user2.address, true);
-
-            await udot.connect(user1).mint({ value: ethers.parseEther("500") });
-            await udot.connect(user1).transfer(user2.address, ethers.parseEther("200"));
-
-            expect(await udot.connect(owner).balanceOf(await udot.getAddress())).to.equal(0);
-        });
-
         it("If the contract is paused, transfers cannot be made", async ()=> {
             const { udot, owner, user1, user2 } = await loadFixture(deployContract);
 
@@ -151,11 +139,6 @@ describe("UDOT", function () {
             await expect(udot.connect(user1).unpause(
             )).to.be.revertedWithCustomError(udot, "OwnableUnauthorizedAccount");
 
-            await expect(udot.connect(user1).whiteList(
-                owner.address,
-                true
-            )).to.be.revertedWithCustomError(udot, "OwnableUnauthorizedAccount");
-
             await expect(udot.connect(user1).setSenderTax(
                 300
             )).to.be.revertedWithCustomError(udot, "OwnableUnauthorizedAccount");
@@ -173,11 +156,6 @@ describe("UDOT", function () {
         it("Valid data must be provided", async ()=> {
             const { udot, owner } = await loadFixture(deployContract);
 
-            await expect(udot.connect(owner).whiteList(
-                "0x0000000000000000000000000000000000000000",
-                true
-            )).to.be.revertedWith("UDOT: User is zero address");
-
             await expect(udot.connect(owner).setSenderTax(
                 3000
             )).to.be.revertedWith("UDOT: Taxes cannot be higher than 10%");
@@ -188,13 +166,11 @@ describe("UDOT", function () {
         });
 
         it("Owner must be able to change data", async ()=> {
-            const { udot, owner, user1 } = await loadFixture(deployContract);
+            const { udot, owner } = await loadFixture(deployContract);
 
-            await udot.connect(owner).whiteList(user1.address, false);
             await udot.connect(owner).setSenderTax(700);
             await udot.connect(owner).setReceiverTax(700);
 
-            expect(await udot.connect(owner).whitelisted(user1.address)).to.equal(false);
             expect(await udot.connect(owner).senderTax()).to.equal(700);
             expect(await udot.connect(owner).receiverTax()).to.equal(700);
         });
