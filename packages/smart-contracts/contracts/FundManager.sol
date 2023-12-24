@@ -42,6 +42,9 @@ contract FundManager is UDOT {
     event RemoveTeacherWallet(address _wallet);
     event RemoveStudentWallet(address _wallet);
     event ChangeKeeperSystem(address _newKeeperSystem, address _oldKeeperSystem);
+    event VoteForDestination(address _wallet, FundsDestination _destination, uint256 _date);
+    event DistributeRewards(FundsDestination _destination, uint256 _amountDistributed, uint256 _date);
+    event VotesValidation(uint256 _votesForUniversity, uint256 _votesForTeachers, uint256 _votesForStudents, uint256 _resetDate, bool _isDistributed);
 
 //Modifiers
     modifier onlyUnregisteredWallets(address _wallet) {
@@ -79,6 +82,11 @@ contract FundManager is UDOT {
         _;
     }
 
+    modifier isVotesEnded() {
+        require(block.timestamp >= votesInit + VOTES_DURATION, "FundManager: The votes are not finished yet");
+        _;
+    }
+
 //Constructor
     constructor(address _udoWallet, address _keeperSystem) UDOT() {
         require(_udoWallet != address(0), "FundManager: The UDOT wallet cannot be a invalid address");
@@ -97,7 +105,7 @@ contract FundManager is UDOT {
      * @notice Allows to vote for a destination of the funds
      * @param _destination The destination of the funds
     */
-    function voteForDestination(FundsDestination _destination) external beforeVote {
+    function voteForDestination(FundsDestination _destination) external beforeVote nonReentrant {
         if (_destination == FundsDestination.University) {
             votesForUniversity++;
         } else if (_destination == FundsDestination.Teachers) {
@@ -107,6 +115,7 @@ contract FundManager is UDOT {
         }
 
         isWalletAlreadyVoted[_msgSender()] = true;
+        emit VoteForDestination(_msgSender(), _destination, block.timestamp);
     }
 
     /**
@@ -118,16 +127,15 @@ contract FundManager is UDOT {
 
 //Keeper Functions
     /**
-     * @notice Allows the keeper system to update data of the contract and reset the votes
+     * @notice Allows the keeper system to update data of the contract, distribute rewards and reset the votes.
     */
-    function updateData() external onlyKeeperSystem {
-        require(block.timestamp >= votesInit + VOTES_DURATION, "FundManager: The votes are not finished yet");
-
-        lastFundsDestination = _getDestinationWithMoreVotes();
-
+    function votesValidation() external onlyKeeperSystem isVotesEnded whenNotPaused {
         if (_getTotalFundsRaised() >= MINIMUM_AMOUNT_TO_DISTRIBUTE) {
-            _distributeRewards(_getTotalFundsRaised(), lastFundsDestination);
+            _distributeRewards(_getTotalFundsRaised(), _getDestinationWithMoreVotes());
+            lastFundsDestination = _getDestinationWithMoreVotes();
         }
+
+        emit VotesValidation(votesForUniversity, votesForTeachers, votesForStudents, block.timestamp, _getTotalFundsRaised() >= MINIMUM_AMOUNT_TO_DISTRIBUTE);
 
         votesForUniversity = 0;
         votesForTeachers = 0;
@@ -270,10 +278,16 @@ contract FundManager is UDOT {
     }
 
 //Internal Functions
+    /**
+     * @notice Allows to get the total amount of funds raised
+    */
     function _getTotalFundsRaised() internal view returns (uint256) {
         return balanceOf(address(this));
     }
 
+    /**
+     * @notice Allows to get the destination with more votes
+    */
     function _getDestinationWithMoreVotes() internal view returns (FundsDestination) {
         if (votesForUniversity > votesForTeachers && votesForUniversity > votesForStudents) {
             return FundsDestination.University;
@@ -286,6 +300,11 @@ contract FundManager is UDOT {
         }
     }
 
+    /**
+     * @notice Allows to distribute the rewards
+     * @param _totalFundsRaised The total amount of funds raised
+     * @param _fundsDestination The destination of the funds
+    */
     function _distributeRewards(uint256 _totalFundsRaised, FundsDestination _fundsDestination) internal {
         if (_fundsDestination == FundsDestination.Teachers) {
             uint256 _totalTeachersWallets = teachersWallets.length;
@@ -304,6 +323,8 @@ contract FundManager is UDOT {
         } else {
             super._update(address(this), udoWallet, _totalFundsRaised);
         }
+
+        emit DistributeRewards(_fundsDestination, _totalFundsRaised, block.timestamp);
     }
 }
 
