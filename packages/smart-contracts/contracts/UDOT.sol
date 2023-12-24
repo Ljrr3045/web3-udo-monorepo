@@ -90,7 +90,7 @@ contract UDOT is ERC20, Ownable, Pausable {
 
     ///@dev The owner can establish what the sender tax will be
     function setSenderTax(uint32 _taxPercent) external onlyOwner {
-        require((_taxPercent > 0) && (_taxPercent < 1000), "UDOT: Taxes cannot be higher than 10%");
+        require(_taxPercent <= 1000, "UDOT: Taxes cannot be higher than 10%");
 
         emit ChangeSenderTax(senderTax, _taxPercent);
         senderTax = _taxPercent;
@@ -98,7 +98,7 @@ contract UDOT is ERC20, Ownable, Pausable {
 
     ///@dev The owner can establish what the receiver tax will be
     function setReceiverTax(uint32 _taxPercent) external onlyOwner {
-        require((_taxPercent > 0) && (_taxPercent < 1000), "UDOT: Taxes cannot be higher than 10%");
+        require(_taxPercent <= 1000, "UDOT: Taxes cannot be higher than 10%");
 
         emit ChangeReceiverTax(receiverTax, _taxPercent);
         receiverTax = _taxPercent;

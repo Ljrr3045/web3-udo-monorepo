@@ -1,5 +1,10 @@
-import { expect } from "chai";
-import { ethers, network } from "hardhat";
+import {
+    expect
+} from "chai";
+import {
+    ethers,
+    network
+} from "hardhat";
 import {
     loadFixture,
 } from "@nomicfoundation/hardhat-toolbox/network-helpers";
@@ -29,7 +34,6 @@ describe("UDOT", function () {
     });
 
     describe("Mint Process", async ()=> {
-
         it("Error: If the user does not support the minted with MATIC, do not mint", async ()=> {
             const { udot, user1 } = await loadFixture(deployContract);
 
@@ -64,7 +68,6 @@ describe("UDOT", function () {
     });
 
     describe("Burn Process", async ()=> {
-
         it("Error: A user without tokens cannot burn", async ()=> {
             const { udot, user1 } = await loadFixture(deployContract);
 
@@ -102,6 +105,98 @@ describe("UDOT", function () {
 
             expect(await ethers.provider.getBalance(await udot.getAddress())).to.equal(0);
             expect(await udot.connect(user1).totalSupply()).to.equal(0);
+        });
+    });
+
+    describe("Transfer Process", async ()=> {
+        it("Fee Wallet should receive transaction taxes", async ()=> {
+            const { udot, owner, user1, user2 } = await loadFixture(deployContract);
+
+            await udot.connect(user1).mint({ value: ethers.parseEther("500") });
+            await udot.connect(user1).transfer(user2.address, ethers.parseEther("200"));
+
+            expect(await udot.connect(owner).balanceOf(await udot.getAddress())).to.equal(ethers.parseEther("20"));
+        });
+
+        it("If users are whitelisted, they do not pay taxes", async ()=> {
+            const { udot, owner, user1, user2 } = await loadFixture(deployContract);
+
+            await udot.connect(owner).whiteList(user1.address, true);
+            await udot.connect(owner).whiteList(user2.address, true);
+
+            await udot.connect(user1).mint({ value: ethers.parseEther("500") });
+            await udot.connect(user1).transfer(user2.address, ethers.parseEther("200"));
+
+            expect(await udot.connect(owner).balanceOf(await udot.getAddress())).to.equal(0);
+        });
+
+        it("If the contract is paused, transfers cannot be made", async ()=> {
+            const { udot, owner, user1, user2 } = await loadFixture(deployContract);
+
+            await udot.connect(owner).pause();
+            await expect(udot.connect(user1).transfer(
+                user2.address,
+                ethers.parseEther("100"))
+            ).to.be.revertedWithCustomError(udot, "EnforcedPause");
+        });
+    });
+
+    describe("Only Owner Access", async ()=> {
+        it("Error: only the owner can access certain functions", async ()=> {
+            const { udot, owner, user1 } = await loadFixture(deployContract);
+
+            await expect(udot.connect(user1).pause(
+            )).to.be.revertedWithCustomError(udot, "OwnableUnauthorizedAccount");
+
+            await expect(udot.connect(user1).unpause(
+            )).to.be.revertedWithCustomError(udot, "OwnableUnauthorizedAccount");
+
+            await expect(udot.connect(user1).whiteList(
+                owner.address,
+                true
+            )).to.be.revertedWithCustomError(udot, "OwnableUnauthorizedAccount");
+
+            await expect(udot.connect(user1).setSenderTax(
+                300
+            )).to.be.revertedWithCustomError(udot, "OwnableUnauthorizedAccount");
+
+            await expect(udot.connect(user1).setReceiverTax(
+                300
+            )).to.be.revertedWithCustomError(udot, "OwnableUnauthorizedAccount");
+
+            await expect(udot.connect(user1).rescueStuckToken(
+                owner.address,
+                user1.address
+            )).to.be.revertedWithCustomError(udot, "OwnableUnauthorizedAccount");
+        });
+
+        it("Valid data must be provided", async ()=> {
+            const { udot, owner } = await loadFixture(deployContract);
+
+            await expect(udot.connect(owner).whiteList(
+                "0x0000000000000000000000000000000000000000",
+                true
+            )).to.be.revertedWith("UDOT: User is zero address");
+
+            await expect(udot.connect(owner).setSenderTax(
+                3000
+            )).to.be.revertedWith("UDOT: Taxes cannot be higher than 10%");
+
+            await expect(udot.connect(owner).setReceiverTax(
+                3000
+            )).to.be.revertedWith("UDOT: Taxes cannot be higher than 10%");
+        });
+
+        it("Owner must be able to change data", async ()=> {
+            const { udot, owner, user1 } = await loadFixture(deployContract);
+
+            await udot.connect(owner).whiteList(user1.address, false);
+            await udot.connect(owner).setSenderTax(700);
+            await udot.connect(owner).setReceiverTax(700);
+
+            expect(await udot.connect(owner).whitelisted(user1.address)).to.equal(false);
+            expect(await udot.connect(owner).senderTax()).to.equal(700);
+            expect(await udot.connect(owner).receiverTax()).to.equal(700);
         });
     });
 });
