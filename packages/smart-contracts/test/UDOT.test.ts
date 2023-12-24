@@ -1,16 +1,16 @@
 import {
-    expect
+    expect,
 } from "chai";
 import {
     ethers,
-    network
+    network,
 } from "hardhat";
 import {
     loadFixture,
 } from "@nomicfoundation/hardhat-toolbox/network-helpers";
 
 describe("UDOT", function () {
-    const deployContract= async () => {
+    const deployContract = async ()=> {
         const [owner, user1, user2] = await ethers.getSigners();
 
         const UDOT = await ethers.getContractFactory("UDOT");
@@ -27,7 +27,7 @@ describe("UDOT", function () {
         return { udot, erc20Mock, owner, user1, user2 };
     }
 
-    describe("Deployment of smart contract", function () {
+    describe("Deployment of smart contract", async ()=> {
         it("UDOT should be deployed", async () => {
             const { udot } = await loadFixture(deployContract);
 
