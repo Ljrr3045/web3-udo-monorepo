@@ -35,7 +35,7 @@ contract UDOT is ERC20, Ownable, Pausable {
         senderTax = 500; // 5%
         receiverTax = 500; // 5%
 
-        cap = 1000000 * (10**decimals());
+        cap = 1000000 * (10**18);
     }
 
 //Useful Functions
