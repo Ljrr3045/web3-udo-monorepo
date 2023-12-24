@@ -17,6 +17,7 @@
         "build:smart-contracts": "npm run --workspace packages/smart-contracts compile",
         "test:smart-contracts": "npm run --workspace packages/smart-contracts test",
         "coverage:smart-contracts": "npm run --workspace packages/smart-contracts coverage",
-        "deploy:smart-contracts": "npm run --workspace packages/smart-contracts deploy"
+        "deploy-local:smart-contracts": "npm run --workspace packages/smart-contracts deploy:local",
+        "deploy-testnet:smart-contracts": "npm run --workspace packages/smart-contracts deploy:testnet"
     }
 }

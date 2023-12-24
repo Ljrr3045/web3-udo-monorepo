@@ -1,12 +1,15 @@
 import { ethers } from "hardhat";
 
 async function main() {
-    const UDOT = await ethers.getContractFactory("UDOT");
-    const udot = await UDOT.deploy();
+    const udoWallet = "0xb615f402D84258039467316506441b238F5bA778";
+    const keeperSystem = "0xF737eA896eE20c8c2Bf6be067462CD91Cc4424eE";
 
-    await udot.waitForDeployment();
+    const FundManager = await ethers.getContractFactory("FundManager");
+    const fundManager = await FundManager.deploy(udoWallet, keeperSystem);
 
-    console.log("Contract deployed to:", await udot.getAddress());
+    await fundManager.waitForDeployment();
+
+    console.log("Contract deployed to:", await fundManager.getAddress());
 }
 
 main().catch((error) => {
