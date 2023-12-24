@@ -12,16 +12,11 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/Pausable.sol";
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 
-import "./interfaces/IUniswapV2Factory.sol";
-import "./interfaces/IUniswapV2Router.sol";
-
 contract UDOT is ERC20, Ownable, Pausable {
-    address public uniswapPair;
-    address public feeWallet;
 
+    uint32 public senderTax;
+    uint32 public receiverTax;
     uint256 public cap;
-    uint256 public sellTax;
-    uint256 public buyTax;
 
 //Mappings
 
@@ -29,25 +24,23 @@ contract UDOT is ERC20, Ownable, Pausable {
 
 //Events
 
-    event userWhiteList(address _user, bool _status);
-    event changeFeeWallet(address _lastFeeWallet, address _newFeeWallet);
-    event changeSellTax(uint256 _lastTax, uint256 _newTax);
-    event changeBuyTax(uint256 _lastTax, uint256 _newTax);
+    event UserWhiteList(address _user, bool _status);
+    event ChangeSenderTax(uint256 _lastTax, uint256 _newTax);
+    event ChangeReceiverTax(uint256 _lastTax, uint256 _newTax);
+    event RescueStuckToken(address _token, uint256 _amount, uint256 _date);
 
 //Constructor
 
-    constructor() Ownable(msg.sender) ERC20("Universidad de Oriente", "UDOT") {
+    constructor()
+        Ownable(msg.sender)
+        ERC20("Universidad de Oriente Token", "UDOT")
+    {
+        whitelisted[address(this)] = true;
 
-        IUniswapV2Router _uniswapV2Router = IUniswapV2Router(0x1b02dA8Cb0d097eB8D57A175b88c7D8b47997506);
-        uniswapPair = IUniswapV2Factory(_uniswapV2Router.factory()).createPair(address(this), _uniswapV2Router.WETH());
+        senderTax = 500; // 5%
+        receiverTax = 500; // 5%
 
-        feeWallet = msg.sender;
-        whitelisted[feeWallet] = true;
-
-        sellTax = 200; // 2%
-        buyTax = 200; // 2%
-
-        cap = 1000000 * 10**decimals();
+        cap = 1000000 * (10**decimals());
     }
 
 //Useful Functions
@@ -55,9 +48,9 @@ contract UDOT is ERC20, Ownable, Pausable {
     /**
         @notice Allows the user to mine UDOT in exchange for MATIC, each UDOT will be backed 1:1 by MATIC
     */
-    function mint() external payable{
-        require(msg.value > 0,"UDOT: The amount must be greater than 0");
-        require((ERC20.totalSupply() + msg.value) <= cap, 'UDOT: Maximum capital exceeded');
+    function mint() external payable {
+        require(msg.value > 0, "UDOT: The amount must be greater than 0");
+        require((ERC20.totalSupply() + msg.value) <= cap, "UDOT: Maximum capital exceeded");
 
         _mint(_msgSender(), msg.value);
     }
@@ -67,7 +60,7 @@ contract UDOT is ERC20, Ownable, Pausable {
         receive the same value in MATIC.
     */
     function burn(uint256 _amount) external {
-        require(_amount > 0,"UDOT: The amount must be greater than 0");
+        require(_amount > 0, "UDOT: The amount must be greater than 0");
 
         _burn(_msgSender(), _amount);
 
@@ -89,65 +82,61 @@ contract UDOT is ERC20, Ownable, Pausable {
 
     ///@dev The owner can add a user to the white list and thus not pay transfer taxes
     function whiteList(address _user, bool _isWhitelisted) external onlyOwner {
-        require(address(0) != _user,"UDOT: User is zero address");
+        require(address(0) != _user, "UDOT: User is zero address");
 
         whitelisted[_user] = _isWhitelisted;
-        emit userWhiteList(_user, _isWhitelisted);
+        emit UserWhiteList(_user, _isWhitelisted);
     }
 
-    ///@dev The owner can establish which will be the wallet that receives all the fees
-    function setFeeWallet(address _feeWallet) external onlyOwner {
-        require(address(0) != _feeWallet,"UDOT: FeeWallet is zero address");
+    ///@dev The owner can establish what the sender tax will be
+    function setSenderTax(uint32 _taxPercent) external onlyOwner {
+        require((_taxPercent > 0) && (_taxPercent < 1000), "UDOT: Taxes cannot be higher than 10%");
 
-        emit changeFeeWallet(feeWallet, _feeWallet);
-        feeWallet = _feeWallet;
+        emit ChangeSenderTax(senderTax, _taxPercent);
+        senderTax = _taxPercent;
     }
 
-    ///@dev The owner can establish what the sales tax will be
-    function setSellTax(uint256 _taxPercent) external onlyOwner {
-        require((_taxPercent > 0) && (_taxPercent < 2000),"UDOT: Taxes cannot be higher than 20%");
+    ///@dev The owner can establish what the receiver tax will be
+    function setReceiverTax(uint32 _taxPercent) external onlyOwner {
+        require((_taxPercent > 0) && (_taxPercent < 1000), "UDOT: Taxes cannot be higher than 10%");
 
-        emit changeSellTax(sellTax, _taxPercent);
-        sellTax = _taxPercent;
-    }
-
-    ///@dev The owner can establish what the buy tax will be
-    function setBuyTax(uint256 _taxPercent) external onlyOwner {
-        require((_taxPercent > 0) && (_taxPercent < 2000),"UDOT: Taxes cannot be higher than 20%");
-
-        emit changeBuyTax(buyTax, _taxPercent);
-        buyTax = _taxPercent;
+        emit ChangeReceiverTax(receiverTax, _taxPercent);
+        receiverTax = _taxPercent;
     }
 
     ///@dev The owner can recover tokens stuck in the contract (but not MATIC)
     function rescueStuckToken(address _token, address _to) external onlyOwner {
+        require(_token != address(this), "UDOT: Cannot recover UDOT");
 
         uint256 _amount = ERC20(_token).balanceOf(address(this));
         ERC20(_token).transfer(_to, _amount);
+
+        emit RescueStuckToken(_token, _amount, block.timestamp);
     }
 
 //Override Functions
 
     ///@dev overwrite the transfer function to be able to take the taxes
-    function _update( address from, address to, uint256 amount ) internal override whenNotPaused{
+    function _update(address from, address to, uint256 amount) internal override whenNotPaused{
+        uint256 _fee;
+        uint _finalAmount = amount;
 
-        if ((!whitelisted[to]) && (buyTax > 0) && (feeWallet != address(0))) {
-
-            uint256 fee = (amount * buyTax)/10000;
-            uint256 _newAmount = amount - fee;
-            super._update(from, feeWallet, fee);
-            super._update(from, to, _newAmount);
-
-        } else if ((!whitelisted[from]) && (sellTax > 0) && (feeWallet != address(0))) {
-
-            uint256 fee = (amount * sellTax)/10000;
-            uint256 _newAmount = amount - fee;
-            super._update(from, feeWallet, fee);
-            super._update(from, to, _newAmount);
-
-        } else {
-
-            super._update(from, to, amount);
+        if (from == address(0) || to == address(0)){
+            super._update(from, to, _finalAmount);
+            return;
         }
+
+        if ((!whitelisted[from]) && (senderTax > 0)) {
+            _fee += (amount * senderTax)/10000;
+            _finalAmount -= _fee;
+        }
+
+        if ((!whitelisted[to]) && (receiverTax > 0)) {
+            _fee += (amount * receiverTax)/10000;
+            _finalAmount -= _fee;
+        }
+
+        super._update(from, address(this), _fee);
+        super._update(from, to, _finalAmount);
     }
 }
