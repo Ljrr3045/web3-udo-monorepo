@@ -30,11 +30,10 @@ contract FundManager is UDOT {
 
     FundsDestination public lastFundsDestination;
 
-//Arrays & Mappings
+//Arrays
     address[] public teachersWallets;
     address[] public studentsWallets;
-
-    mapping(address => bool) public isWalletAlreadyVoted;
+    address[] public walletsAlreadyVoted;
 
 //Events
     event AddTeacherWallet(address _wallet);
@@ -72,7 +71,7 @@ contract FundManager is UDOT {
     }
 
     modifier beforeVote() {
-        require(!isWalletAlreadyVoted[_msgSender()], "FundManager: The wallet already voted");
+        require(!_isWalletAlreadyVoted(_msgSender()), "FundManager: The wallet already voted");
         require(balanceOf(_msgSender()) >= MINIMUM_AMOUNT_TO_VOTE, "FundManager: The wallet is not UDOT holder");
         _;
     }
@@ -114,7 +113,7 @@ contract FundManager is UDOT {
             votesForStudents++;
         }
 
-        isWalletAlreadyVoted[_msgSender()] = true;
+        walletsAlreadyVoted.push(_msgSender());
         emit VoteForDestination(_msgSender(), _destination, block.timestamp);
     }
 
@@ -137,9 +136,10 @@ contract FundManager is UDOT {
 
         emit VotesValidation(votesForUniversity, votesForTeachers, votesForStudents, block.timestamp, _getTotalFundsRaised() >= MINIMUM_AMOUNT_TO_DISTRIBUTE);
 
-        votesForUniversity = 0;
+        _cleanWalletsAlreadyVoted();
         votesForTeachers = 0;
         votesForStudents = 0;
+        votesForUniversity = 0;
         votesInit = block.timestamp;
     }
 
@@ -236,6 +236,14 @@ contract FundManager is UDOT {
     }
 
     /**
+     * @notice Allows to get the wallets that already voted
+     * @return The wallets that already voted
+    */
+    function getWalletsAlreadyVoted() external view returns (address[] memory) {
+        return walletsAlreadyVoted;
+    }
+
+    /**
      * @notice Allows to get the total amount of teachers wallets
     */
     function getTeachersWalletsLength() external view returns (uint256) {
@@ -250,10 +258,72 @@ contract FundManager is UDOT {
     }
 
     /**
+     * @notice Allows to get the total amount of wallets that already voted
+    */
+    function getWalletsAlreadyVotedLength() external view returns (uint256) {
+        return walletsAlreadyVoted.length;
+    }
+
+    /**
      * @notice Allows to verify is a wallet is a teacher wallet
      * @param _wallet The wallet to verify
     */
     function isTeacherWallet(address _wallet) external view returns (bool) {
+        return _isTeacherWallet(_wallet);
+    }
+
+    /**
+     * @notice Allows to verify is a wallet is a student wallet
+     * @param _wallet The wallet to verify
+    */
+    function isStudentWallet(address _wallet) external view returns (bool) {
+        return _isStudentWallet(_wallet);
+    }
+
+    /**
+     * @notice Allows to verify if a wallet already voted
+     * @param _wallet The wallet to verify
+    */
+    function isWalletAlreadyVoted(address _wallet) external view returns (bool) {
+        return _isWalletAlreadyVoted(_wallet);
+    }
+
+//Internal Functions
+    /**
+     * @notice Allows to get the total amount of funds raised
+    */
+    function _getTotalFundsRaised() internal view returns (uint256) {
+        return balanceOf(address(this));
+    }
+
+    /**
+     * @notice Allows to clean the wallets that already voted
+    */
+    function _cleanWalletsAlreadyVoted() internal {
+        for (uint256 i = 0; i < walletsAlreadyVoted.length; i++) {
+            walletsAlreadyVoted.pop();
+        }
+    }
+
+    /**
+     * @notice Allows to verify if a wallet already voted
+     * @param _wallet The wallet to verify
+    */
+    function _isWalletAlreadyVoted(address _wallet) internal view returns (bool) {
+        for (uint256 i = 0; i < walletsAlreadyVoted.length; i++) {
+            if (walletsAlreadyVoted[i] == _wallet) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * @notice Allows to verify is a wallet is a teacher wallet
+     * @param _wallet The wallet to verify
+    */
+    function _isTeacherWallet(address _wallet) internal view returns (bool) {
         for (uint256 i = 0; i < teachersWallets.length; i++) {
             if (teachersWallets[i] == _wallet) {
                 return true;
@@ -267,7 +337,7 @@ contract FundManager is UDOT {
      * @notice Allows to verify is a wallet is a student wallet
      * @param _wallet The wallet to verify
     */
-    function isStudentWallet(address _wallet) external view returns (bool) {
+    function _isStudentWallet(address _wallet) internal view returns (bool) {
         for (uint256 i = 0; i < studentsWallets.length; i++) {
             if (studentsWallets[i] == _wallet) {
                 return true;
@@ -275,14 +345,6 @@ contract FundManager is UDOT {
         }
 
         return false;
-    }
-
-//Internal Functions
-    /**
-     * @notice Allows to get the total amount of funds raised
-    */
-    function _getTotalFundsRaised() internal view returns (uint256) {
-        return balanceOf(address(this));
     }
 
     /**
