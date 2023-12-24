@@ -16,12 +16,15 @@ describe("UDOT", function () {
         const UDOT = await ethers.getContractFactory("UDOT");
         const udot = await UDOT.deploy();
 
+        const ERC20Mock = await ethers.getContractFactory("ERC20Mock");
+        const erc20Mock = await ERC20Mock.deploy();
+
         await network.provider.send("hardhat_setBalance", [
             user1.address,
             ethers.encodeBytes32String("1000000000000000000000000"),
         ]);
 
-        return { udot, owner, user1, user2 };
+        return { udot, erc20Mock, owner, user1, user2 };
     }
 
     describe("Deployment of smart contract", function () {
@@ -126,6 +129,32 @@ describe("UDOT", function () {
                 user2.address,
                 ethers.parseEther("100"))
             ).to.be.revertedWithCustomError(udot, "EnforcedPause");
+        });
+    });
+
+    describe("Rescue locked tokens", async ()=> {
+        it("Error: Cannot recover UDOT token", async ()=> {
+            const { udot, owner, user1 } = await loadFixture(deployContract);
+
+            await udot.connect(user1).mint({ value: ethers.parseEther("500") });
+            await udot.connect(user1).transfer(await udot.getAddress(), ethers.parseEther("200"));
+            expect(await udot.connect(owner).balanceOf(await udot.getAddress())).to.equal(ethers.parseEther("200"));
+
+            await expect(udot.connect(owner).rescueStuckToken(
+                await udot.getAddress(),
+                owner.address
+            )).to.be.revertedWith("UDOT: Cannot recover UDOT");
+        });
+
+        it("If the contract is paused, transfers cannot be made", async ()=> {
+            const { udot, erc20Mock, owner, user1 } = await loadFixture(deployContract);
+
+            await erc20Mock.connect(owner).transfer(await udot.getAddress(), ethers.parseEther("500"));
+            expect(await erc20Mock.connect(owner).balanceOf(await udot.getAddress())).to.equal(ethers.parseEther("500"));
+
+            await udot.connect(owner).rescueStuckToken(await erc20Mock.getAddress(), user1.address);
+            expect(await erc20Mock.connect(owner).balanceOf(await udot.getAddress())).to.equal(0);
+            expect(await erc20Mock.connect(owner).balanceOf(user1.address)).to.equal(ethers.parseEther("500"));
         });
     });
 

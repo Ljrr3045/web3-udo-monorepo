@@ -14,6 +14,9 @@
         "bootstrap": "npm install && npm run install:pkgs",
         "clean": "lerna exec rm -- -rf node_modules",
         "install:pkgs": "lerna exec npm install -- --also=dev",
-        "test:smart-contracts": "npm run --workspace packages/smart-contracts test"
+        "compile:smart-contracts": "npm run --workspace packages/smart-contracts compile",
+        "test:smart-contracts": "npm run --workspace packages/smart-contracts test",
+        "coverage:smart-contracts": "npm run --workspace packages/smart-contracts coverage",
+        "deploy:smart-contracts": "npm run --workspace packages/smart-contracts deploy"
     }
 }

@@ -18,6 +18,7 @@
     "test": "hardhat test",
     "compile": "hardhat compile",
     "coverage": "hardhat coverage",
+    "deploy": "hardhat run --network hardhat scripts/deploy.ts",
     "docgen": "solidity-docgen",
     "docgen:watch": "solidity-docgen --watch"
   }
