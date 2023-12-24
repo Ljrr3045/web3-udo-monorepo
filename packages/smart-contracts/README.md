@@ -13,8 +13,8 @@ This project was created under the idea of designing a decentralized and autonom
 ## Token characteristics
 
 - Maximum supplement: 1.000.000 UDOT
-- Used network: Polygon
-- Contract address: 0xEc969d8308F5a9BE1C473CCDE957f08aa48Cfc64
+- Used network: Mumbai testnet
+- Contract address: 0x2BC765Ef851Ce9AFAC3455075bff8B0cc553eb46
 
 ### Use cases
 The UDOT token is an ERC20 utility token. This can can be used as a digital currency. The main real uses that it could have are:
@@ -44,7 +44,7 @@ The information on smart contracts can be found at the following link:
 * [Documentation](https://github.com/Ljrr3045/udo-erc20-token/blob/master/docs/index.md)
 
 You can verify the contract in the Mumbai testnet network at the following link:
-* [Contract verified](https://polygonscan.com/token/0xEc969d8308F5a9BE1C473CCDE957f08aa48Cfc64)
+* [Contract verified](https://mumbai.polygonscan.com/address/0x2BC765Ef851Ce9AFAC3455075bff8B0cc553eb46)
 
 ## Useful commands
 
