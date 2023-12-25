@@ -26,6 +26,28 @@ contract UDOT is ERC20, Ownable, Pausable, ReentrancyGuard {
     event ChangeReceiverTax(uint256 _lastTax, uint256 _newTax);
     event RescueStuckToken(address _token, uint256 _amount, uint256 _date);
 
+//Modifiers
+    modifier beforeMint() {
+        require(msg.value > 0, "UDOT: The amount must be greater than 0");
+        require((ERC20.totalSupply() + msg.value) <= cap, "UDOT: Maximum capital exceeded");
+        _;
+    }
+
+    modifier beforeBurn(uint256 _amount) {
+        require(_amount > 0, "UDOT: The amount must be greater than 0");
+        _;
+    }
+
+    modifier beforeRescueStuckToken(address _token) {
+        require(_token != address(this), "UDOT: Cannot recover UDOT");
+        _;
+    }
+
+    modifier taxValidator(uint32 _taxPercent) {
+        require(_taxPercent <= 1000, "UDOT: Taxes cannot be higher than 10%");
+        _;
+    }
+
 //Constructor
     constructor()
         Ownable(msg.sender)
@@ -43,10 +65,7 @@ contract UDOT is ERC20, Ownable, Pausable, ReentrancyGuard {
     /**
      * @notice Allows the user to mine UDOT in exchange for MATIC, each UDOT will be backed 1:1 by MATIC
     */
-    function mint() external payable nonReentrant {
-        require(msg.value > 0, "UDOT: The amount must be greater than 0");
-        require((ERC20.totalSupply() + msg.value) <= cap, "UDOT: Maximum capital exceeded");
-
+    function mint() external payable nonReentrant beforeMint {
         _mint(_msgSender(), msg.value);
     }
 
@@ -54,9 +73,7 @@ contract UDOT is ERC20, Ownable, Pausable, ReentrancyGuard {
      * @notice Allows the user to burn UDOT in exchange for MATIC, each UDOT will be backed 1:1 by MATIC
      * @param _amount The amount of UDOT to burn
     */
-    function burn(uint256 _amount) external nonReentrant {
-        require(_amount > 0, "UDOT: The amount must be greater than 0");
-
+    function burn(uint256 _amount) external nonReentrant beforeBurn(_amount) {
         _burn(_msgSender(), _amount);
 
         (bool _success,) = payable(_msgSender()).call{ value: _amount }("");
@@ -82,9 +99,7 @@ contract UDOT is ERC20, Ownable, Pausable, ReentrancyGuard {
      * @dev The owner can establish what the sender tax will be
      * @param _taxPercent The tax percentage to be applied
     */
-    function setSenderTax(uint32 _taxPercent) external onlyOwner {
-        require(_taxPercent <= 1000, "UDOT: Taxes cannot be higher than 10%");
-
+    function setSenderTax(uint32 _taxPercent) external onlyOwner taxValidator(_taxPercent) {
         emit ChangeSenderTax(senderTax, _taxPercent);
         senderTax = _taxPercent;
     }
@@ -93,9 +108,7 @@ contract UDOT is ERC20, Ownable, Pausable, ReentrancyGuard {
      * @dev The owner can establish what the receiver tax will be
      * @param _taxPercent The tax percentage to be applied
     */
-    function setReceiverTax(uint32 _taxPercent) external onlyOwner {
-        require(_taxPercent <= 1000, "UDOT: Taxes cannot be higher than 10%");
-
+    function setReceiverTax(uint32 _taxPercent) external onlyOwner taxValidator(_taxPercent) {
         emit ChangeReceiverTax(receiverTax, _taxPercent);
         receiverTax = _taxPercent;
     }
@@ -105,9 +118,7 @@ contract UDOT is ERC20, Ownable, Pausable, ReentrancyGuard {
      * @param _token The address of the token to be recovered
      * @param _to The address to which the tokens will be sent
     */
-    function rescueStuckToken(address _token, address _to) external onlyOwner {
-        require(_token != address(this), "UDOT: Cannot recover UDOT");
-
+    function rescueStuckToken(address _token, address _to) external onlyOwner beforeRescueStuckToken(_token) {
         uint256 _amount = ERC20(_token).balanceOf(address(this));
         ERC20(_token).transfer(_to, _amount);
 
