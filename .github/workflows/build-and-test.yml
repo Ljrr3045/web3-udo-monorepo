@@ -28,9 +28,6 @@ jobs:
         with:
           node-version: 16
 
-      - name: Set env
-        run: cp .env.example .env
-
       - name: Clean cache
         run: npm cache clean --force
 
