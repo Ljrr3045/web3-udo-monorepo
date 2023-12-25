@@ -1,5 +1,18 @@
 name: Build and Test
 
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+env:
+  MNEMONIC: ${{ secrets.MNEMONIC }}
+  MUMBAI_URL: ${{ secrets.MUMBAI_URL }}
+  POLYGON_MAINNET_URL: ${{ secrets.POLYGON_MAINNET_URL }}
+  POLYGONSCAN_API_KEY: ${{ secrets.POLYGONSCAN_API_KEY }}
+  COINMARKETCAP_API_KEY: ${{ secrets.COINMARKETCAP_API_KEY }}
+
 jobs:
   build-test:
     runs-on: ubuntu-latest
