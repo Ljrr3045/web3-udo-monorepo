@@ -638,11 +638,3 @@ function _update(address from, address to, uint256 amount) internal
 
 _overwrite the transfer function to be able to take the taxes_
 
-## ERC20Mock
-
-### constructor
-
-```solidity
-constructor() public
-```
-
