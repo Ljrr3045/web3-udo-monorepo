@@ -41,7 +41,7 @@ This project uses the following technologies and protocols:
 ## Documentation
 
 The information on smart contracts can be found at the following link:
-* [Documentation](https://github.com/Ljrr3045/udo-erc20-token/blob/master/docs/index.md)
+* [Documentation](https://github.com/Ljrr3045/web3-udo-monorepo/blob/master/packages/smart-contracts/docs/index.md)
 
 You can verify the contract in the Mumbai testnet network at the following link:
 * [Contract verified](https://mumbai.polygonscan.com/address/0x25dcD86B0948703b7Ced7BD531BE723e86daFCDF)
