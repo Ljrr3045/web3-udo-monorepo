@@ -10,13 +10,13 @@
 
 This project was created under the idea of designing a decentralized and autonomous payment system, with which it is sought to serve as an economic and financial refuge for the "Universidad de Oriente Token". The main mission of this project is to allow the university to manage its funds autonomously.
 
-## Token characteristics
+## Token Characteristics
 
-- Maximum supplement: 1.000.000 UDOT
-- Used network: Mumbai testnet
-- Contract address: 0x25dcD86B0948703b7Ced7BD531BE723e86daFCDF
+- Maximum Supplement: 1.000.000 UDOT
+- Used Network: Mumbai Testnet
+- Contract Address: 0x25dcD86B0948703b7Ced7BD531BE723e86daFCDF
 
-### Use cases
+### Use Cases
 The UDOT token is an ERC20 utility token. This can can be used as a digital currency. The main real uses that it could have are:
 
 - Create reserve of university funds
@@ -29,7 +29,7 @@ The UDOT token is an ERC20 utility token. This can can be used as a digital curr
 - The relationship between UDOT and MATIC will be 1:1, this means that each time a UDOT is created it will be backed in an equivalent way by a MATIC.
 - As the relationship between UDON and MATIC is 1:1, every time a UDOT is burned, it will return the equivalent value in MATIC to the user.
 
-## Technologies and protocols used
+## Technologies & Protocols Used
 
 This project uses the following technologies and protocols:
 * [Solidity](https://docs.soliditylang.org/en/v0.8.23/)
@@ -44,26 +44,26 @@ The information on smart contracts can be found at the following link:
 * [Documentation](https://github.com/Ljrr3045/web3-udo-monorepo/blob/master/packages/smart-contracts/docs/index.md)
 
 You can verify the contract in the Mumbai testnet network at the following link:
-* [Contract verified](https://mumbai.polygonscan.com/address/0x25dcD86B0948703b7Ced7BD531BE723e86daFCDF)
+* [Contract Verified](https://mumbai.polygonscan.com/address/0x25dcD86B0948703b7Ced7BD531BE723e86daFCDF)
 
-## Useful commands
+## Useful Commands
 
 ```
-# Compile contracts
+# Compile Contracts
 npm run compile
 
-# Run tests
+# Run Tests
 npm run test
 
 # Run Coverage
 npm run coverage
 
-# Run deploy on local network
+# Run Deploy (Local Network)
 npm run deploy:local
 
-# Run deploy on testnet network
+# Run deploy (Testnet Network)
 npm run deploy:testnet
 
-# Generate documentation
+# Generate Documentation
 npm run docgen
 ```
