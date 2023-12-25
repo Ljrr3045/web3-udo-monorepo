@@ -1,9 +1,17 @@
 name: Build and Test
+
 on:
   push:
     branches: [master]
   pull_request:
     branches: [master]
+
+env:
+  MNEMONIC: ${{ secrets.MNEMONIC }}
+  MUMBAI_URL: ${{ secrets.MUMBAI_URL }}
+  POLYGON_MAINNET_URL: ${{ secrets.POLYGON_MAINNET_URL }}
+  POLYGONSCAN_API_KEY: ${{ secrets.POLYGONSCAN_API_KEY }}
+  COINMARKETCAP_API_KEY: ${{ secrets.COINMARKETCAP_API_KEY }}
 
 jobs:
   build-test:
@@ -28,22 +36,6 @@ jobs:
 
       - name: Install dependencies
         run: npm run bootstrap
-
-      - name: Create .env file
-          run: |
-            touch .env
-            echo MNEMONIC=${MNEMONIC} >> .env
-            echo MUMBAI_URL=${MUMBAI_URL} >> .env
-            echo POLYGON_MAINNET_URL=${POLYGON_MAINNET_URL} >> .env
-            echo POLYGONSCAN_API_KEY=${POLYGONSCAN_API_KEY} >> .env
-            echo COINMARKETCAP_API_KEY=${COINMARKETCAP_API_KEY} >> .env
-            cat .env
-          env:
-            MNEMONIC: ${{ secrets.MNEMONIC }}
-            MUMBAI_URL: ${{ secrets.MUMBAI_URL }}
-            POLYGON_MAINNET_URL: ${{ secrets.POLYGON_MAINNET_URL }}
-            POLYGONSCAN_API_KEY: ${{ secrets.POLYGONSCAN_API_KEY }}
-            COINMARKETCAP_API_KEY: ${{ secrets.COINMARKETCAP_API_KEY }}
 
       - name: Build
         run: npm run build:smart-contracts
