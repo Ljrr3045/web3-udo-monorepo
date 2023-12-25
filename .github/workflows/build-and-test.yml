@@ -1,34 +1,44 @@
 name: Build and Test
 on:
-  push:
-    branches: [master]
-  pull_request:
-    branches: [master]
+    push:
+        branches: [master]
+    pull_request:
+        branches: [master]
 
 jobs:
-  build-test:
-    runs-on: ubuntu-latest
+    build-test:
+        runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
+        - name: Checkout
+            uses: actions/checkout@v2
+            with:
+                fetch-depth: 0
 
-      - name: Setup NodeJS 16
-        uses: actions/setup-node@v3
-        with:
-          node-version: 16
+        - name: Setup NodeJS 16
+            uses: actions/setup-node@v3
+            with:
+                node-version: 16
 
-      - name: Clean cache
-        run: npm cache clean --force
+        - name: Clean cache
+            run: npm cache clean --force
 
-      - name: Install dependencies
-        run: npm run bootstrap
+        - name: Install dependencies
+            run: npm run bootstrap
 
-      - name: Build
-        run: npm run build:smart-contracts
+        - name: Create .env
+            uses: SpicyPizza/create-envfile@v1
+            with:
+                MNEMONIC: ${{ secrets.MNEMONIC }}
+                MUMBAI_URL: ${{ secrets.MUMBAI_URL }}
+                POLYGON_MAINNET_URL: ${{ secrets.POLYGON_MAINNET_URL }}
+                POLYGONSCAN_API_KEY: ${{ secrets.POLYGONSCAN_API_KEY }}
+                COINMARKETCAP_API_KEY: ${{ secrets.COINMARKETCAP_API_KEY }}
+                file_name: .env
 
-      - name: Test
-        run: npm run test:smart-contracts
+        - name: Build
+            run: npm run build:smart-contracts
+
+        - name: Test
+            run: npm run test:smart-contracts
 
