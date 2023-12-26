@@ -1,5 +1,8 @@
 {
   "name": "smart-contracts",
+  "version": "0.1.0",
+  "author": "Ljrr3045",
+  "license": "ISC",
   "devDependencies": {
     "@nomiclabs/hardhat-etherscan": "^3.1.0",
     "@nomicfoundation/hardhat-toolbox": "^4.0.0",

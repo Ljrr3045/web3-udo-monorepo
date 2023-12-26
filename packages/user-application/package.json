@@ -1,7 +1,8 @@
 {
   "name": "user-application",
   "version": "0.1.0",
-  "private": true,
+  "author": "Ljrr3045",
+  "license": "ISC",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
