@@ -2,8 +2,8 @@
     "name": "web3-udo-monorepo",
     "description": "Monorepo of UDOT project",
     "version": "1.0.0",
+    "author": "Ljrr3045",
     "license": "ISC",
-    "private": false,
     "workspaces": [
         "packages/**"
     ],
