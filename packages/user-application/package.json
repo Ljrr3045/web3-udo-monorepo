@@ -1,7 +1,9 @@
 {
   "name": "user-application",
+  "description": "UI of UDOT project",
   "version": "0.1.0",
-  "private": true,
+  "author": "Ljrr3045",
+  "license": "ISC",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

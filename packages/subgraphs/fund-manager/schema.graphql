@@ -1,0 +1,154 @@
+type AddStudentWallet @entity(immutable: true) {
+  id: Bytes!
+  _wallet: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type AddTeacherWallet @entity(immutable: true) {
+  id: Bytes!
+  _wallet: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type Approval @entity(immutable: true) {
+  id: Bytes!
+  owner: Bytes! # address
+  spender: Bytes! # address
+  value: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type ChangeKeeperSystem @entity(immutable: true) {
+  id: Bytes!
+  _newKeeperSystem: Bytes! # address
+  _oldKeeperSystem: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type ChangeReceiverTax @entity(immutable: true) {
+  id: Bytes!
+  _lastTax: BigInt! # uint256
+  _newTax: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type ChangeSenderTax @entity(immutable: true) {
+  id: Bytes!
+  _lastTax: BigInt! # uint256
+  _newTax: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type DistributeRewards @entity(immutable: true) {
+  id: Bytes!
+  _destination: Int! # uint8
+  _amountDistributed: BigInt! # uint256
+  _date: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type OwnershipTransferred @entity(immutable: true) {
+  id: Bytes!
+  previousOwner: Bytes! # address
+  newOwner: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type Paused @entity(immutable: true) {
+  id: Bytes!
+  account: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type RemoveStudentWallet @entity(immutable: true) {
+  id: Bytes!
+  _wallet: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type RemoveTeacherWallet @entity(immutable: true) {
+  id: Bytes!
+  _wallet: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type RescueStuckToken @entity(immutable: true) {
+  id: Bytes!
+  _token: Bytes! # address
+  _amount: BigInt! # uint256
+  _date: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type Transfer @entity(immutable: true) {
+  id: Bytes!
+  from: Bytes! # address
+  to: Bytes! # address
+  value: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type Unpaused @entity(immutable: true) {
+  id: Bytes!
+  account: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type UserWhiteList @entity(immutable: true) {
+  id: Bytes!
+  _user: Bytes! # address
+  _status: Boolean! # bool
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type VoteForDestination @entity(immutable: true) {
+  id: Bytes!
+  _wallet: Bytes! # address
+  _destination: Int! # uint8
+  _date: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type VotesValidation @entity(immutable: true) {
+  id: Bytes!
+  _votesForUniversity: BigInt! # uint256
+  _votesForTeachers: BigInt! # uint256
+  _votesForStudents: BigInt! # uint256
+  _resetDate: BigInt! # uint256
+  _isDistributed: Boolean! # bool
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}

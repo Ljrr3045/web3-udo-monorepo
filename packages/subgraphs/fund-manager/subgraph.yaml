@@ -1,0 +1,72 @@
+specVersion: 0.0.5
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: FundManager
+    network: mumbai
+    source:
+      address: "0x25dcD86B0948703b7Ced7BD531BE723e86daFCDF"
+      abi: FundManager
+      startBlock: 43998235
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - AddStudentWallet
+        - AddTeacherWallet
+        - Approval
+        - ChangeKeeperSystem
+        - ChangeReceiverTax
+        - ChangeSenderTax
+        - DistributeRewards
+        - OwnershipTransferred
+        - Paused
+        - RemoveStudentWallet
+        - RemoveTeacherWallet
+        - RescueStuckToken
+        - Transfer
+        - Unpaused
+        - UserWhiteList
+        - VoteForDestination
+        - VotesValidation
+      abis:
+        - name: FundManager
+          file: ./abis/FundManager.json
+      eventHandlers:
+        - event: AddStudentWallet(address)
+          handler: handleAddStudentWallet
+        - event: AddTeacherWallet(address)
+          handler: handleAddTeacherWallet
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: ChangeKeeperSystem(address,address)
+          handler: handleChangeKeeperSystem
+        - event: ChangeReceiverTax(uint256,uint256)
+          handler: handleChangeReceiverTax
+        - event: ChangeSenderTax(uint256,uint256)
+          handler: handleChangeSenderTax
+        - event: DistributeRewards(uint8,uint256,uint256)
+          handler: handleDistributeRewards
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+        - event: Paused(address)
+          handler: handlePaused
+        - event: RemoveStudentWallet(address)
+          handler: handleRemoveStudentWallet
+        - event: RemoveTeacherWallet(address)
+          handler: handleRemoveTeacherWallet
+        - event: RescueStuckToken(address,uint256,uint256)
+          handler: handleRescueStuckToken
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+        - event: Unpaused(address)
+          handler: handleUnpaused
+        - event: UserWhiteList(address,bool)
+          handler: handleUserWhiteList
+        - event: VoteForDestination(address,uint8,uint256)
+          handler: handleVoteForDestination
+        - event: VotesValidation(uint256,uint256,uint256,uint256,bool)
+          handler: handleVotesValidation
+      file: ./src/fund-manager.ts
