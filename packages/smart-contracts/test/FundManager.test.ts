@@ -69,7 +69,6 @@ describe("FundManager", function () {
             expect(await fundManager.connect(owner).getTeachersWalletsLength()).to.equal(1);
             expect(await fundManager.connect(owner).getStudentsWalletsLength()).to.equal(1);
 
-
             // Remove
             await fundManager.connect(owner).removeTeacherWallet(teacher.address);
             await fundManager.connect(owner).removeStudentWallet(student.address);
