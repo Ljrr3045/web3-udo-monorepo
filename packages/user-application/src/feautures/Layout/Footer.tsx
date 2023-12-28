@@ -13,7 +13,7 @@ export const Footer = () => {
       }
     },
     {
-      text: "Repository",
+      text: "Github",
       onclick: () => {
         window.open("https://github.com/Ljrr3045/web3-udo-monorepo", "_blank");
       }
