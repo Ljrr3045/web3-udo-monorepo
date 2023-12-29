@@ -1,9 +1,20 @@
+import React, { useEffect } from "react";
 import Image from "next/image";
 import type { NextPage } from "next";
 import { Card } from "../components/common/Card";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
+import { useAccount } from "wagmi";
+import { useRouter } from "next/router";
 
 const Home: NextPage = () => {
+  const router = useRouter();
+  const { isConnected } = useAccount();
+
+  useEffect(() => {
+    if (isConnected && router.pathname === "/") {
+      router.push("/dashboard");
+    }
+  }, [isConnected]);
 
   return (
     <div className="w-full flex flex-col items-center justify-center">
