@@ -1,0 +1,38 @@
+name: Lint and Build Application
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+env:
+  NEXT_PUBLIC_PROJECT_ID: ${{ secrets.NEXT_PUBLIC_PROJECT_ID }}
+  NEXT_PUBLIC_ALCHEMY_KEY: ${{ secrets.NEXT_PUBLIC_ALCHEMY_KEY }}
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Setup NodeJS 16
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: Clean cache
+        run: npm cache clean --force
+
+      - name: Install dependencies
+        run: npm run bootstrap
+
+      - name: Lint
+        run: npm run lint:app
+
+      - name: Build
+        run: npm run build:app
