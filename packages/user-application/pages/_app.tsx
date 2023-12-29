@@ -4,13 +4,17 @@ import Head from "next/head";
 import type { AppProps } from "next/app";
 import { polygonMumbai } from "wagmi/chains";
 import { publicProvider } from "wagmi/providers/public";
+import { alchemyProvider } from "wagmi/providers/alchemy";
 import { configureChains, createConfig, WagmiConfig } from "wagmi";
-import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
+import { getDefaultWallets, RainbowKitProvider, lightTheme } from "@rainbow-me/rainbowkit";
 import { MainLayout } from "../feautures/Layout/MainLayout";
 
 const { chains, publicClient, webSocketPublicClient } = configureChains(
   [polygonMumbai],
-  [publicProvider()]
+  [
+    alchemyProvider({ apiKey: process.env.NEXT_PUBLIC_ALCHEMY_KEY ?? "" }),
+    publicProvider(),
+  ]
 );
 
 const { connectors } = getDefaultWallets({
@@ -33,7 +37,13 @@ function MyApp({ Component, pageProps }: AppProps) {
         <title>University of Oriente - UDOT</title>
       </Head>
       <WagmiConfig config={wagmiConfig}>
-        <RainbowKitProvider chains={chains} locale="en-US">
+        <RainbowKitProvider
+          locale="en-US"
+          chains={chains}
+          theme={lightTheme({
+            accentColor: "#2563eb",
+          })}
+        >
           <MainLayout>
             <Component {...pageProps} />
           </MainLayout>
