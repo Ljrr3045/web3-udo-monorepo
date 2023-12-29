@@ -1,13 +1,18 @@
 import React from "react";
 import Image from "next/image";
-import { ConnectButton } from "@rainbow-me/rainbowkit";
+import { CgMenu } from "react-icons/cg";
 import { Bar } from "../../components/Layout/Bar";
+import { useAccount } from "wagmi";
 
 export const Header = () => {
+  const { isConnected } = useAccount()
+
   return (
     <Bar>
       <UdoLogo />
-      <ConnectButton />
+      {isConnected && (
+        <SideMenu />
+      )}
     </Bar>
   )
 }
@@ -23,3 +28,13 @@ const UdoLogo = () => {
     />
   )
 }
+
+const SideMenu = () => {
+  return (
+    <CgMenu
+      size={30}
+      className="cursor-pointer"
+    />
+  );
+}
+

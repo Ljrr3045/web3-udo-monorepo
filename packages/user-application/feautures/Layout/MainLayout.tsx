@@ -10,7 +10,9 @@ export const MainLayout = ({
   return (
     <div className="w-full h-screen flex flex-col items-center justify-between">
       <Header />
-      {children}
+      <div className="w-full h-screen flex flex-col items-center justify-center p-4">
+        {children}
+      </div>
       <Footer />
     </div>
   );

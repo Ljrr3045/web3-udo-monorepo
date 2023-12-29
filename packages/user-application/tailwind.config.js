@@ -6,7 +6,22 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      screens: {
+        zero: "0px",
+        min: "281px",
+        "2min": "380px",
+        xs: "495px",
+        "2xs": "541px",
+        "3xs": "582px",
+        sm: "640px",
+        md: "768px",
+        "2md": "912px",
+        lg: "1024px",
+        xl: "1280px",
+        "2xl": "1536px",
+      }
+    },
   },
   plugins: [],
 }
