@@ -6,6 +6,7 @@ import { polygonMumbai } from "wagmi/chains";
 import { publicProvider } from "wagmi/providers/public";
 import { configureChains, createConfig, WagmiConfig } from "wagmi";
 import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
+import { MainLayout } from "../feautures/Layout/MainLayout";
 
 const { chains, publicClient, webSocketPublicClient } = configureChains(
   [polygonMumbai],
@@ -32,8 +33,10 @@ function MyApp({ Component, pageProps }: AppProps) {
         <title>University of Oriente - UDOT</title>
       </Head>
       <WagmiConfig config={wagmiConfig}>
-        <RainbowKitProvider chains={chains}>
-          <Component {...pageProps} />
+        <RainbowKitProvider chains={chains} locale="en-US">
+          <MainLayout>
+            <Component {...pageProps} />
+          </MainLayout>
         </RainbowKitProvider>
       </WagmiConfig>
     </>
