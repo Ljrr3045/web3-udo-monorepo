@@ -1,7 +1,7 @@
 {
   "name": "smart-contracts",
   "description": "Smart contracts of UDOT project",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "author": "Ljrr3045",
   "license": "ISC",
   "devDependencies": {
