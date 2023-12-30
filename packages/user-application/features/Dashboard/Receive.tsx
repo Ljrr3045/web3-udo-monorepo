@@ -31,7 +31,6 @@ export const Receive = () => {
         <div className="w-full flex flex-col items-center justify-center gap-4">
           <QRCode
             value={address ?? ""}
-            size={320}
             className="rounded-xl"
           />
           <button

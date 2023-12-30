@@ -7,9 +7,9 @@ export const MainLayout = ({
   children: React.ReactNode
 }) => {
   return (
-    <div className="w-full h-screen flex flex-col items-center justify-between">
+    <div className="w-full min-h-screen flex flex-col items-center justify-between">
       <Header />
-      <div className="w-full h-screen flex flex-col items-center justify-center p-4">
+      <div className="w-full flex flex-col items-center justify-center p-4">
         {children}
       </div>
       <Footer />
