@@ -3,23 +3,27 @@ import Image from "next/image";
 import { Bar } from "../../components/Layout/Bar";
 import { CgMenu } from "react-icons/cg";
 import { useAccount } from "wagmi";
+import { UseContractManager } from "./Hooks/UseContractManager";
 
 export const Header = () => {
-  const [showMenu, setShowMenu] = useState<boolean>(false);
+  const [showMoreOptions, setShowMoreOptions] = useState<boolean>(false);
   const { isConnected } = useAccount();
 
 /* Effects */
   useEffect(() => {
     if (isConnected) {
-      setShowMenu(true);
+      setShowMoreOptions(true);
     }
   }, [isConnected]);
 
   return (
     <Bar>
       <UdoLogo />
-      {showMenu && (
-        <SideMenu />
+      {showMoreOptions && (
+        <>
+          <UserBalance />
+          <SideMenu />
+        </>
       )}
     </Bar>
   );
@@ -34,6 +38,16 @@ const UdoLogo = () => {
       width={40}
       height={40}
     />
+  );
+}
+
+const UserBalance = () => {
+  const { balanceOfUser } = UseContractManager();
+
+  return (
+    <p className="text-base font-bold text-white select-none">
+      {`Balance: ${balanceOfUser} UDOT`}
+    </p>
   );
 }
 
