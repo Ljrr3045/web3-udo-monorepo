@@ -1,6 +1,6 @@
 import React from "react";
 import type { NextPage } from "next";
-import { WidgetCard } from "../components/common/WidgetCard";
+import { WidgetCard } from "../components/Common/WidgetCard";
 import { Receive } from "../features/Dashboard/Receive";
 
 const Dashboard: NextPage = () => {

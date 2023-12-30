@@ -3,7 +3,7 @@ import QRCode from "react-qr-code";
 import { useAccount } from "wagmi";
 import { toast } from "react-toastify";
 import { CgSpinnerAlt } from "react-icons/cg";
-import { WidgetCard } from "../../components/common/WidgetCard";
+import { WidgetCard } from "../../components/Common/WidgetCard";
 
 export const Receive = () => {
   const [addressToShow, setAddressToShow] = useState<string>("");

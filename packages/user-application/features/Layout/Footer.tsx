@@ -22,7 +22,7 @@ export const Footer = () => {
       {data.map((item, index) => (
         <p
           key={index}
-          className="text-sm cursor-pointer"
+          className="text-sm cursor-pointer select-none"
           onClick={item.onclick}
         >
           {item.text}

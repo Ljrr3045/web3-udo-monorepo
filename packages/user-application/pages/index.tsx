@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import Image from "next/image";
 import type { NextPage } from "next";
-import { Card } from "../components/common/Card";
+import { Card } from "../components/Common/Card";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { useAccount } from "wagmi";
 import { useRouter } from "next/router";
