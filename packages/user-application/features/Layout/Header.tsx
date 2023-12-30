@@ -8,6 +8,7 @@ export const Header = () => {
   const [showMenu, setShowMenu] = useState<boolean>(false);
   const { isConnected } = useAccount();
 
+/* Effects */
   useEffect(() => {
     if (isConnected) {
       setShowMenu(true);

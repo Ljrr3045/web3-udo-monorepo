@@ -11,6 +11,7 @@ import { configureChains, createConfig, WagmiConfig } from "wagmi";
 import { getDefaultWallets, RainbowKitProvider, lightTheme } from "@rainbow-me/rainbowkit";
 import { MainLayout } from "../features/Layout/MainLayout";
 
+/* Wagmi config */
 const { chains, publicClient, webSocketPublicClient } = configureChains(
   [polygonMumbai],
   [
