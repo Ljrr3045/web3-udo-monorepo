@@ -3,18 +3,21 @@ import React from "react";
 export const Button = ({
   text,
   onClick,
-  isDisabled = false
+  isDisabled = false,
+  isLoading = false,
  }:{
   text: string;
   onClick: () => void;
   isDisabled?: boolean;
+  isLoading?: boolean;
 }) => {
-  const opacity = isDisabled ? "opacity-60" : "opacity-100";
-  const cursor = isDisabled ? "cursor-not-allowed" : "cursor-pointer";
+  const opacity = isDisabled || isLoading ? "opacity-60" : "opacity-100";
+  const cursor = isDisabled || isLoading ? "cursor-not-allowed" : "cursor-pointer";
+  const textToShow = isLoading ? "Loading..." : text;
 
 /* Internal functions */
   const handleClick = () => {
-    if (!isDisabled) {
+    if (!isDisabled && !isLoading) {
       onClick();
     }
   }
@@ -25,7 +28,7 @@ export const Button = ({
       onClick={handleClick}
     >
       <p className="text-base font-normal text-white">
-        {text}
+        {textToShow}
       </p>
     </button>
   )

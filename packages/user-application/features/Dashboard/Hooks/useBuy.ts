@@ -25,7 +25,7 @@ export const useBuy = ({
   });
 
 /* Internal functions */
-  const handleBuy = () => {
+  const sendTransaction = () => {
     if (write) write();
   }
 
@@ -49,6 +49,6 @@ export const useBuy = ({
     }, [isError]);
 
   return {
-    handleBuy,
+    sendTransaction,
   };
 }
