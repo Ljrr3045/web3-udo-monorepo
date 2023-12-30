@@ -1,13 +1,15 @@
 import "../styles/globals.css";
 import "@rainbow-me/rainbowkit/styles.css";
+import "react-toastify/dist/ReactToastify.css";
 import Head from "next/head";
 import type { AppProps } from "next/app";
 import { polygonMumbai } from "wagmi/chains";
 import { publicProvider } from "wagmi/providers/public";
 import { alchemyProvider } from "wagmi/providers/alchemy";
+import { ToastContainer } from "react-toastify";
 import { configureChains, createConfig, WagmiConfig } from "wagmi";
 import { getDefaultWallets, RainbowKitProvider, lightTheme } from "@rainbow-me/rainbowkit";
-import { MainLayout } from "../feautures/Layout/MainLayout";
+import { MainLayout } from "../features/Layout/MainLayout";
 
 const { chains, publicClient, webSocketPublicClient } = configureChains(
   [polygonMumbai],
@@ -46,6 +48,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         >
           <MainLayout>
             <Component {...pageProps} />
+            <ToastContainer />
           </MainLayout>
         </RainbowKitProvider>
       </WagmiConfig>
