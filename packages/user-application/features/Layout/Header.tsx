@@ -4,7 +4,7 @@ import { Bar } from "../../components/Layout/Bar";
 import { CgMenu } from "react-icons/cg";
 import { useAccount } from "wagmi";
 import { toast } from "react-toastify";
-import { UseContractManager } from "./Hooks/UseContractManager";
+import { UseDataGetter } from "./Hooks/UseDataGetter";
 
 export const Header = () => {
   const [showMoreOptions, setShowMoreOptions] = useState<boolean>(false);
@@ -43,11 +43,11 @@ const UdoLogo = () => {
 }
 
 const UserBalance = () => {
-  const { balanceOfUser, UDOTAddress } = UseContractManager();
+  const { balanceOfUser } = UseDataGetter();
 
   const handleCopy = () => {
-    navigator.clipboard.writeText(UDOTAddress);
-    toast.success("UDOT address copied to clipboard");
+    navigator.clipboard.writeText(balanceOfUser);
+    toast.success("Balance copied to clipboard");
   }
 
   return (
