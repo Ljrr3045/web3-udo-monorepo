@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import QRCode from "react-qr-code";
 import { useAccount } from "wagmi";
 import { toast } from "react-toastify";
+import { CgSpinnerAlt } from "react-icons/cg";
 import { WidgetCard } from "../../components/common/WidgetCard";
 
 export const Receive = () => {
@@ -27,6 +28,12 @@ export const Receive = () => {
     <WidgetCard
       title="Receive"
     >
+      {!showQR && (
+        <CgSpinnerAlt
+          size={32}
+          className="loading-icon"
+        />
+      )}
       {showQR && (
         <div className="w-full flex flex-col items-center justify-center gap-4">
           <QRCode
