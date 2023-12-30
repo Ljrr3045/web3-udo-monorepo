@@ -11,7 +11,7 @@ const Home: NextPage = () => {
   const { isConnected } = useAccount();
 
   useEffect(() => {
-    if (isConnected && router.pathname === "/") {
+    if (isConnected) {
       router.push("/dashboard");
     }
   }, [isConnected]);

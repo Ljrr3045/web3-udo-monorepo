@@ -1,13 +1,25 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { Bar } from "../../components/Layout/Bar";
 import { CgMenu } from "react-icons/cg";
+import { useAccount } from "wagmi";
 
 export const Header = () => {
+  const [showMenu, setShowMenu] = useState<boolean>(false);
+  const { isConnected } = useAccount();
+
+  useEffect(() => {
+    if (isConnected) {
+      setShowMenu(true);
+    }
+  }, [isConnected]);
+
   return (
     <Bar>
       <UdoLogo />
-      <SideMenu />
+      {showMenu && (
+        <SideMenu />
+      )}
     </Bar>
   );
 }
@@ -15,25 +27,21 @@ export const Header = () => {
 /* Internal components */
 const UdoLogo = () => {
   return (
-    <div className="w-auto h-auto">
-      <Image
-        src="/images/udo-logo.png"
-        alt="UDO Logo"
-        width={40}
-        height={40}
-      />
-    </div>
+    <Image
+      src="/images/udo-logo.png"
+      alt="UDO Logo"
+      width={40}
+      height={40}
+    />
   );
 }
 
 const SideMenu = () => {
   return (
-    <div className="w-auto h-auto">
-      <CgMenu
-        size={30}
-        cursor={"pointer"}
-      />
-    </div>
+    <CgMenu
+      size={30}
+      className="cursor-pointer"
+    />
   );
 }
 
