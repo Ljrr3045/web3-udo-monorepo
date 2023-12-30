@@ -4,7 +4,7 @@ import { Bar } from "../../components/Layout/Bar";
 import { CgMenu } from "react-icons/cg";
 import { useAccount } from "wagmi";
 import { toast } from "react-toastify";
-import { UseDataGetter } from "./Hooks/UseDataGetter";
+import { useDataGetter } from "./Hooks/useDataGetter";
 
 export const Header = () => {
   const [showMoreOptions, setShowMoreOptions] = useState<boolean>(false);
@@ -43,7 +43,7 @@ const UdoLogo = () => {
 }
 
 const UserBalance = () => {
-  const { balanceOfUser } = UseDataGetter();
+  const { balanceOfUser } = useDataGetter();
 
   const handleCopy = () => {
     navigator.clipboard.writeText(balanceOfUser);

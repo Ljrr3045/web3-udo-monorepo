@@ -1,7 +1,7 @@
 import { useAccount, useBalance } from "wagmi";
 import { UDOTAddress } from "../../../utils/Constants";
 
-export const UseDataGetter = () => {
+export const useDataGetter = () => {
   const { address } = useAccount();
 
   const { data } = useBalance({
