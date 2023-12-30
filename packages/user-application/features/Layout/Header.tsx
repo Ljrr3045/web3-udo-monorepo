@@ -3,6 +3,7 @@ import Image from "next/image";
 import { Bar } from "../../components/Layout/Bar";
 import { CgMenu } from "react-icons/cg";
 import { useAccount } from "wagmi";
+import { toast } from "react-toastify";
 import { UseContractManager } from "./Hooks/UseContractManager";
 
 export const Header = () => {
@@ -42,10 +43,18 @@ const UdoLogo = () => {
 }
 
 const UserBalance = () => {
-  const { balanceOfUser } = UseContractManager();
+  const { balanceOfUser, UDOTAddress } = UseContractManager();
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(UDOTAddress);
+    toast.success("UDOT address copied to clipboard");
+  }
 
   return (
-    <p className="text-base font-bold text-white select-none">
+    <p
+      className="text-base font-bold text-white cursor-pointer select-none"
+      onClick={handleCopy}
+    >
       {`Balance: ${balanceOfUser} UDOT`}
     </p>
   );

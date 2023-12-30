@@ -13,7 +13,7 @@ export const Receive = () => {
 /* Internal functions */
   const handleCopy = () => {
     navigator.clipboard.writeText(address ?? "");
-    toast.success("Address copied to clipboard");
+    toast.success("Wallet address copied to clipboard");
   }
 
 /* Effects */

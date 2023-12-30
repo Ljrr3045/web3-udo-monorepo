@@ -21,5 +21,5 @@ export const UseContractManager = () => {
       }
     }, [data]);
 
-  return { balanceOfUser };
+  return { balanceOfUser, UDOTAddress };
 }
