@@ -19,7 +19,7 @@ export const Footer = () => {
       }
     },
     {
-        text: "MumbaiScan",
+        text: "Block Explorer",
         onclick: () => {
           window.open("https://mumbai.polygonscan.com/address/0x25dcD86B0948703b7Ced7BD531BE723e86daFCDF", "_blank");
         }
@@ -28,7 +28,7 @@ export const Footer = () => {
 
   return (
     <Bar>
-      <div className="flex flex-row items-center gap-2 text-white">
+      <div className="flex flex-row items-center gap-4 text-white">
         {LeftData.map((item, index) => (
           <p
             key={index}
@@ -39,7 +39,7 @@ export const Footer = () => {
           </p>
         ))}
       </div>
-      <div className="flex flex-row items-center gap-2 text-white">
+      <div className="flex flex-row items-center gap-4 text-white">
         {RightData.map((item, index) => (
           <p
             key={index}

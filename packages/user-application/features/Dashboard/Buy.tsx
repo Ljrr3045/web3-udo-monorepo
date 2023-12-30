@@ -3,12 +3,14 @@ import { WidgetCard } from "../../components/Common/WidgetCard";
 import { InputNumber } from "../../components/Common/InputNumber";
 import { Button } from "../../components/Common/Button";
 import { useAccount, useBalance } from "wagmi";
+import { useBuy } from "./Hooks/useBuy";
 
 export const Buy = () => {
   const [isValid, setIsValid] = useState<boolean>(false);
   const [amount, setAmount] = useState<string>("0.0");
   const [currentBalance, setCurrentBalance] = useState<string>("0.0");
   const { address } = useAccount();
+  const { handleBuy } = useBuy({ value: amount });
   const { data: maticBalance } = useBalance({
     address: address,
   });
@@ -16,10 +18,6 @@ export const Buy = () => {
 /* Internal functions */
   const handleChange = (amount: string) => {
     setAmount(amount);
-  }
-
-  const handleBuy = () => {
-    console.log("Buy UDOT");
   }
 
 /* Effects */
@@ -49,7 +47,7 @@ export const Buy = () => {
       <InputNumber
         amount={amount}
         onChange={handleChange}
-        maxAmount={Number(maticBalance?.formatted)}
+        maxAmount={Number(currentBalance)}
         isError={!isValid}
         errorMessage="Invalid amount, please enter a correct amount."
         currentBalance={currentBalance}
