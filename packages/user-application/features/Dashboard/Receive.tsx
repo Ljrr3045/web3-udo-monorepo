@@ -4,9 +4,10 @@ import { useAccount } from "wagmi";
 import { toast } from "react-toastify";
 import { CgSpinnerAlt } from "react-icons/cg";
 import { WidgetCard } from "../../components/Common/WidgetCard";
+import { Button } from "../../components/Common/Button";
 
 export const Receive = () => {
-  const [addressToShow, setAddressToShow] = useState<string>("");
+  const [addressToShow, setAddressToShow] = useState<string>("0x0");
   const [showQR, setShowQR] = useState<boolean>(false);
   const { address } = useAccount();
 
@@ -40,14 +41,10 @@ export const Receive = () => {
             value={address ?? ""}
             className="rounded-xl"
           />
-          <button
-            className="w-full flex items-center justify-center p-4 rounded-xl bg-blue-600 cursor-pointer select-none"
+          <Button
+            text={addressToShow}
             onClick={handleCopy}
-          >
-            <p className="text-base font-normal text-white">
-              {addressToShow}
-            </p>
-          </button>
+          />
         </div>
       )}
     </WidgetCard>

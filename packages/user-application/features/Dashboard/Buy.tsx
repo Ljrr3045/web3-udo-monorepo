@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { WidgetCard } from "../../components/Common/WidgetCard";
 import { InputNumber } from "../../components/Common/InputNumber";
+import { Button } from "../../components/Common/Button";
 import { useAccount, useBalance } from "wagmi";
 
 export const Buy = () => {
@@ -15,6 +16,10 @@ export const Buy = () => {
 /* Internal functions */
   const handleChange = (amount: string) => {
     setAmount(amount);
+  }
+
+  const handleBuy = () => {
+    console.log("Buy UDOT");
   }
 
 /* Effects */
@@ -50,6 +55,11 @@ export const Buy = () => {
         currentBalance={currentBalance}
         currencySymbol="MATIC"
       />
+      <Button
+        text="Buy UDOT"
+        onClick={handleBuy}
+        isDisabled={Number(amount) === 0 || !isValid}
+      />
     </WidgetCard>
-  )
+  );
 }
