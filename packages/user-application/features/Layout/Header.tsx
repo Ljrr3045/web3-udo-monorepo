@@ -24,12 +24,15 @@ export const Header = () => {
     <Bar
       isHeader={true}
     >
-      <UdoLogo />
+      <div className="flex flex-row items-center gap-6">
+        <UdoLogo />
+        <LanguageSelector />
+      </div>
       {showMoreOptions && (
-        <>
+        <div className="flex flex-row items-center gap-6">
           <UserBalance />
           <MainSideMenu />
-        </>
+        </div>
       )}
     </Bar>
   );
@@ -47,6 +50,14 @@ const UdoLogo = () => {
   );
 }
 
+const LanguageSelector = () => {
+  return (
+    <p className="zero:hidden 2md:flex text-base font-bold text-white px-10 py-2 border-2 border-white rounded-xl cursor-pointer select-none">
+      EN
+    </p>
+  );
+}
+
 const UserBalance = () => {
   const { balanceOfUser } = useDataGetter();
 
@@ -57,7 +68,7 @@ const UserBalance = () => {
 
   return (
     <p
-      className="text-base font-bold text-white cursor-pointer select-none"
+      className="zero:hidden 2md:flex text-base font-bold text-white p-2 border-2 border-white rounded-xl cursor-pointer select-none"
       onClick={handleCopy}
     >
       {`Balance: ${balanceOfUser} UDOT`}
