@@ -27,7 +27,7 @@ export const Button = ({
       className={`w-full flex items-center justify-center p-4 rounded-xl bg-blue-600 select-none ${cursor} ${opacity}`}
       onClick={handleClick}
     >
-      <p className="text-base font-normal text-white">
+      <p className="text-base font-bold text-white">
         {textToShow}
       </p>
     </button>

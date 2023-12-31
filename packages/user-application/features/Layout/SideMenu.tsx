@@ -1,4 +1,8 @@
+import { useRouter } from "next/router";
 import React from "react";
+import { CgBox, CgClose } from "react-icons/cg";
+import { Button } from "../../components/Common/Button";
+import { useDisconnect } from "wagmi";
 
 export const SideMenu = ({
   onClose,
@@ -6,11 +10,90 @@ export const SideMenu = ({
   onClose: () => void;
 }) => {
   return (
-    <div className="fixed inset-0 w-full min-h-screen flex z-50">
+    <div className="fixed inset-0 w-full min-h-screen flex z-10">
       <div className="fixed inset-0 w-full min-h-screen cursor-pointer bg-black/30" onClick={onClose} />
-      <div className="w-full flex flex-col p-4 items-center bg-white z-10 rounded 2md:max-w-[30%] zero:max-w-[100%]">
-        gola
+      <div className="w-full flex flex-col items-star justify-between p-4 z-20 bg-white rounded 2md:max-w-[25%] zero:max-w-[100%]">
+        <div className="w-full flex flex-col items-star gap-4">
+          <CloseButton onClose={onClose} />
+          <NavigationOptions onClose={onClose} />
+        </div>
+        <ButtonsOptions onClose={onClose} />
       </div>
     </div>
   )
+}
+
+/* Internal components */
+const CloseButton = ({
+  onClose,
+}:{
+  onClose: () => void;
+}) => {
+  return (
+    <div className="w-full flex flex-row items-end justify-end">
+      <CgClose
+        className="cursor-pointer text-blue-600"
+        size={32}
+        onClick={onClose}
+      />
+    </div>
+  );
+}
+
+const NavigationOptions = ({
+  onClose,
+}:{
+  onClose: () => void;
+}) => {
+  const router = useRouter();
+
+  const options = [
+    {
+      title: "Dashboard",
+      icon: <CgBox size={32} className="text-blue-600" />,
+      onClick: () => {
+        router.push("/dashboard");
+        onClose();
+      },
+    }
+  ];
+
+  return (
+    <div className="w-full flex flex-col items-star gap-2">
+        {options.map((option, index) => (
+          <div
+            key={index}
+            className="w-full flex flex-row items-center justify-start gap-4 p-2 border-b border-blue-600 cursor-pointer"
+            onClick={option.onClick}
+          >
+            {option.icon}
+            <p className="text-base font-bold text-blue-600">
+              {option.title}
+            </p>
+          </div>
+        ))}
+    </div>
+  );
+}
+
+const ButtonsOptions = ({
+  onClose,
+}:{
+  onClose: () => void;
+}) => {
+  const router = useRouter();
+  const { disconnect } = useDisconnect();
+
+  const handleLogout = () => {
+    disconnect();
+    router.push("/");
+    onClose();
+  };
+
+  return (
+    <Button
+      text="Logout"
+      onClick={handleLogout}
+    />
+  );
 }

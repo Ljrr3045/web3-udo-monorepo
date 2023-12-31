@@ -15,6 +15,8 @@ export const Header = () => {
   useEffect(() => {
     if (isConnected) {
       setShowMoreOptions(true);
+    } else {
+      setShowMoreOptions(false);
     }
   }, [isConnected]);
 
