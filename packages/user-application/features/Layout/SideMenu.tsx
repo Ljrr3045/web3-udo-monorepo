@@ -1,8 +1,9 @@
 import { useRouter } from "next/router";
 import React from "react";
-import { CgBox, CgClose } from "react-icons/cg";
+import { CgClose, CgDesktop, CgOptions } from "react-icons/cg";
 import { Button } from "../../components/Common/Button";
-import { useDisconnect } from "wagmi";
+import { useAccount, useDisconnect } from "wagmi";
+import { useDataGetter } from "./Hooks/useDataGetter";
 
 export const SideMenu = ({
   onClose,
@@ -46,13 +47,23 @@ const NavigationOptions = ({
   onClose: () => void;
 }) => {
   const router = useRouter();
+  const { address } = useAccount();
+  const { ownerAddress } = useDataGetter();
 
   const options = [
     {
       title: "Dashboard",
-      icon: <CgBox size={32} className="text-blue-600" />,
+      icon: <CgDesktop size={32} className="text-blue-600" />,
       onClick: () => {
         router.push("/dashboard");
+        onClose();
+      },
+    },
+    {
+      title: "Settings",
+      icon: <CgOptions size={32} className="text-blue-600" />,
+      onClick: () => {
+        router.push("/settings");
         onClose();
       },
     }
@@ -60,18 +71,21 @@ const NavigationOptions = ({
 
   return (
     <div className="w-full flex flex-col items-star gap-2">
-        {options.map((option, index) => (
-          <div
-            key={index}
-            className="w-full flex flex-row items-center justify-start gap-4 p-2 border-b border-blue-600 cursor-pointer"
-            onClick={option.onClick}
-          >
-            {option.icon}
-            <p className="text-base font-bold text-blue-600">
-              {option.title}
-            </p>
-          </div>
-        ))}
+        {options.map((option, index) => {
+          if (option.title === "Settings" && address !== ownerAddress) return null;
+          return (
+            <div
+              key={index}
+              className="w-full flex flex-row items-center justify-start gap-4 p-2 border-b border-blue-600 cursor-pointer"
+              onClick={option.onClick}
+            >
+              {option.icon}
+              <p className="text-base font-bold text-blue-600">
+                {option.title}
+              </p>
+            </div>
+          )
+        })}
     </div>
   );
 }
