@@ -6,6 +6,7 @@ import { useAccount } from "wagmi";
 import { toast } from "react-toastify";
 import { useDataGetter } from "./Hooks/useDataGetter";
 import { SideMenu } from "./SideMenu";
+import { LanguageSelector } from "../Translate/LanguageSelector";
 
 export const Header = () => {
   const [showMoreOptions, setShowMoreOptions] = useState<boolean>(false);
@@ -47,14 +48,6 @@ const UdoLogo = () => {
       width={40}
       height={40}
     />
-  );
-}
-
-const LanguageSelector = () => {
-  return (
-    <p className="zero:hidden 2md:flex text-base font-bold text-white px-10 py-2 border-2 border-white rounded-xl cursor-pointer select-none">
-      EN
-    </p>
   );
 }
 

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { parseCookies, setCookie } from "nookies";
 import { COOKIE_NAME } from "../../utils/Constants";
 
+/* Top Declarations */
 interface LanguageDescriptor {
   name: string;
   title: string;
@@ -16,7 +17,9 @@ declare global {
   }
 }
 
-export const LanguageSwitcher = () => {
+/* Component */
+export const LanguageSelector = () => {
+  const [usedLanguage, setUsedLanguage] = useState<string>();
   const [currentLanguage, setCurrentLanguage] = useState<string>();
   const [languageConfig, setLanguageConfig] = useState<any>();
 
@@ -26,7 +29,23 @@ export const LanguageSwitcher = () => {
     window.location.reload();
   };
 
+  const handleLanguageChange = () => {
+    if (currentLanguage === "en" || currentLanguage === "auto"){
+      switchLanguage("es")();
+    } else {
+      switchLanguage("en")();
+    }
+  };
+
 /* Effects */
+  useEffect(() => {
+    if (currentLanguage === "en" || currentLanguage === "auto"){
+      setUsedLanguage("EN");
+    } else {
+      setUsedLanguage("ES");
+    }
+  }, [currentLanguage]);
+
   useEffect(() => {
     const cookies = parseCookies()
     const existingLanguageCookieValue = cookies[COOKIE_NAME];
@@ -58,26 +77,14 @@ export const LanguageSwitcher = () => {
   }
 
   return (
-    <div className="text-center">
-      {languageConfig.languages.map((ld: LanguageDescriptor, i: number) => (
-        <>
-          {currentLanguage === ld.name ||
-          (currentLanguage === "auto" &&
-            languageConfig.defaultLanguage === ld) ? (
-            <span key={`l_s_${ld}`} className="mx-3 text-orange-300">
-              {ld.title}
-            </span>
-          ) : (
-            <a
-              key={`l_s_${ld}`}
-              onClick={switchLanguage(ld.name)}
-              className="mx-3 text-blue-300 cursor-pointer hover:underline"
-            >
-              {ld.title}
-            </a>
-          )}
-        </>
-      ))}
+    <div
+      className="border-2 border-white rounded-xl px-10 py-2 cursor-pointer select-none"
+      onClick={handleLanguageChange}
+    >
+      <p className="text-base font-bold text-white">
+        {usedLanguage}
+      </p>
     </div>
   );
 };
+

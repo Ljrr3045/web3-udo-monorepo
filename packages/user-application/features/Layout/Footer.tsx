@@ -19,7 +19,7 @@ export const Footer = () => {
       }
     },
     {
-        text: "Block Explorer",
+        text: "Contract",
         onclick: () => {
           window.open("https://mumbai.polygonscan.com/address/0x25dcD86B0948703b7Ced7BD531BE723e86daFCDF", "_blank");
         }
