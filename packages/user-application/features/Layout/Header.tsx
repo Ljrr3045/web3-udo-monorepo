@@ -6,6 +6,7 @@ import { useAccount } from "wagmi";
 import { toast } from "react-toastify";
 import { useDataGetter } from "./Hooks/useDataGetter";
 import { SideMenu } from "./SideMenu";
+import { LanguageSelector } from "../Translate/LanguageSelector";
 
 export const Header = () => {
   const [showMoreOptions, setShowMoreOptions] = useState<boolean>(false);
@@ -24,12 +25,15 @@ export const Header = () => {
     <Bar
       isHeader={true}
     >
-      <UdoLogo />
+      <div className="flex flex-row items-center gap-6">
+        <UdoLogo />
+        <LanguageSelector />
+      </div>
       {showMoreOptions && (
-        <>
+        <div className="flex flex-row items-center gap-6">
           <UserBalance />
           <MainSideMenu />
-        </>
+        </div>
       )}
     </Bar>
   );
@@ -57,7 +61,7 @@ const UserBalance = () => {
 
   return (
     <p
-      className="text-base font-bold text-white cursor-pointer select-none"
+      className="zero:hidden 2md:flex text-base font-bold text-white p-2 border-2 border-white rounded-xl cursor-pointer select-none"
       onClick={handleCopy}
     >
       {`Balance: ${balanceOfUser} UDOT`}

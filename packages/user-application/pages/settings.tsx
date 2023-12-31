@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from "react";
-import type { NextPage } from "next";
-import { Receive } from "../features/Dashboard/Receive";
-import { Buy } from "../features/Dashboard/Buy";
-import { Sell } from "../features/Dashboard/Sell";
+import React, { useEffect, useState } from "react";
+import { NextPage } from "next";
 import { useAccount } from "wagmi";
 import { CgSpinnerAlt } from "react-icons/cg";
+import { ManageStudents } from "../features/Settings/ManageStudents";
+import { ManageTeachers } from "../features/Settings/ManageTeachers";
+import { ManageFees } from "../features/Settings/ManageFees";
+import { ManageTokenPause } from "../features/Settings/ManageTokenPause";
 
-const Dashboard: NextPage = () => {
+const Settings: NextPage = () => {
   const [showSpinner, setShowSpinner] = useState<boolean>(true);
   const [showDashboard, setShowDashboard] = useState<boolean>(false);
   const { isConnected, isConnecting } = useAccount();
@@ -29,7 +30,7 @@ const Dashboard: NextPage = () => {
   }, [isConnected, isConnecting]);
 
   return (
-    <div className="w-full flex flex-wrap items-center justify-center gap-4">
+    <div className="w-full flex flex-wrap items-center justify-center gap-4" >
       {showSpinner && (
         <CgSpinnerAlt
           size={50}
@@ -39,11 +40,12 @@ const Dashboard: NextPage = () => {
       {showDashboard && (
         <>
           <div className="w-full flex flex-col items-center justify-center gap-4 max-w-[566px]">
-            <Buy />
-            <Sell />
+            <ManageStudents />
+            <ManageTeachers />
           </div>
           <div className="w-full flex flex-col items-center justify-center gap-4 max-w-[566px]">
-            <Receive />
+            <ManageTokenPause />
+            <ManageFees />
           </div>
         </>
       )}
@@ -51,4 +53,4 @@ const Dashboard: NextPage = () => {
   );
 }
 
-export default Dashboard;
+export default Settings;
