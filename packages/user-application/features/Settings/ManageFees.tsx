@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import Image from "next/image";
 import { WidgetCard } from "../../components/Common/WidgetCard";
 import { InputPercentage } from "../../components/Common/InputPercentage";
 import { Button } from "../../components/Common/Button";
 import { useManageFees } from "./Hooks/useManageFees";
+import { CgArrowUpR } from "react-icons/cg";
 
 export const ManageFees = () => {
   const [percentage, setPercentage] = useState<string>("");
@@ -19,11 +19,9 @@ export const ManageFees = () => {
       title="Manage Fees"
     >
       <div className="w-full flex flex-row items-center justify-start gap-2">
-        <Image
-          src="/images/udo-logo.png"
-          alt="UDO Logo"
-          width={25}
-          height={25}
+        <CgArrowUpR
+          size={25}
+          color="#2563eb"
         />
         <p className="text-sm font-normal text-black text-start">
           {`Set the sender or receiver tax percentage for each transaction.`}

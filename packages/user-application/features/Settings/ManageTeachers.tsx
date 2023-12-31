@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import Image from "next/image";
 import { WidgetCard } from "../../components/Common/WidgetCard";
 import { InputAddress } from "../../components/Common/InputAddress";
 import { ethers } from "ethers";
 import { Button } from "../../components/Common/Button";
 import { useManageTeachers } from "./Hooks/useManageTeachers";
+import { CgArrowRightR } from "react-icons/cg";
 
 export const ManageTeachers = () => {
   const [address, setAddress] = useState<string>("");
@@ -15,11 +15,9 @@ export const ManageTeachers = () => {
       title="Manage Teachers"
     >
       <div className="w-full flex flex-row items-center justify-start gap-2">
-        <Image
-          src="/images/udo-logo.png"
-          alt="UDO Logo"
-          width={25}
-          height={25}
+        <CgArrowRightR
+          size={25}
+          color="#2563eb"
         />
         <p className="text-sm font-normal text-black text-start">
           {`Add or remove teachers from the beneficiary list.`}
