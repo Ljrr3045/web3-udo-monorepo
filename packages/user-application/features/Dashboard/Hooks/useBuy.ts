@@ -10,12 +10,14 @@ export const useBuy = ({
 }:{
   value: string
 }) => {
+  const mintAmount = value !== "" ? value : "0.0";
+
 /* Hooks interactions */
   const { config } = usePrepareContractWrite({
     address: UDOTAddress,
     abi: UDOT_ABI,
     functionName: "mint",
-    value: ethers.parseEther(value)
+    value: ethers.parseEther(mintAmount)
   });
 
   const { data, write } = useContractWrite(config);
