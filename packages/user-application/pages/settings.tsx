@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { NextPage } from "next";
 import { useAccount } from "wagmi";
 import { CgSpinnerAlt } from "react-icons/cg";
-import { AddStudent } from "../features/Settings/AddStudent";
-import { AddTeacher } from "../features/Settings/AddTeacher";
+import { ManageStudents } from "../features/Settings/ManageStudents";
+import { ManageTeachers } from "../features/Settings/ManageTeachers";
 import { ChangeFee } from "../features/Settings/ChangeFee";
 import { PauseToken } from "../features/Settings/PauseToken";
 
@@ -40,8 +40,8 @@ const Settings: NextPage = () => {
       {showDashboard && (
         <>
           <div className="w-full flex flex-col items-center justify-center gap-4 max-w-[566px]">
-            <AddStudent />
-            <AddTeacher />
+            <ManageStudents />
+            <ManageTeachers />
           </div>
           <div className="w-full flex flex-col items-center justify-center gap-4 max-w-[566px]">
             <PauseToken />

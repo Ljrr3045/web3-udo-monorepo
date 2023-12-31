@@ -1,12 +1,12 @@
 import React from "react";
 import { WidgetCard } from "../../components/Common/WidgetCard";
 
-export const AddTeacher = () => {
+export const ManageStudents = () => {
   return (
     <WidgetCard
-      title="AddTeacher"
+      title="Manage Students"
     >
-      AddTeacher
+      ManageStudents
     </WidgetCard>
   )
 }
