@@ -1,6 +1,6 @@
 import React from "react";
 
-export const InputAddress = ({
+export const InputPercentage = ({
   value,
   onChange,
   isError,
@@ -21,7 +21,9 @@ export const InputAddress = ({
         className={
           `w-full p-4 text-base rounded-xl border-2 opacity-60 cursor-pointer focus:outline-none focus:opacity-100 ${borderColor}`
         }
-        type="text"
+        type="number"
+        min={0}
+        max={10}
         value={value}
         placeholder={placeholder}
         onChange={(e) => onChange(e.target.value)}

@@ -36,10 +36,12 @@ export const ManageStudents = () => {
         <Button
           text="Add Student"
           onClick={sendTxAddStudentWallet}
+          isDisabled={address === "" || !ethers.isAddress(address)}
         />
         <Button
           text="Remove Student"
           onClick={sendTxRemoveStudentWallet}
+          isDisabled={address === "" || !ethers.isAddress(address)}
         />
       </div>
     </WidgetCard>

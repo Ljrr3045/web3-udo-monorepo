@@ -42,7 +42,9 @@ const Dashboard: NextPage = () => {
             <Buy />
             <Sell />
           </div>
-          <Receive />
+          <div className="w-full flex flex-col items-center justify-center gap-4 max-w-[566px]">
+            <Receive />
+          </div>
         </>
       )}
     </div>

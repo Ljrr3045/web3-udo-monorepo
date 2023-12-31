@@ -4,7 +4,7 @@ import { useAccount } from "wagmi";
 import { CgSpinnerAlt } from "react-icons/cg";
 import { ManageStudents } from "../features/Settings/ManageStudents";
 import { ManageTeachers } from "../features/Settings/ManageTeachers";
-import { ChangeFee } from "../features/Settings/ChangeFee";
+import { ManageFees } from "../features/Settings/ManageFees";
 import { PauseToken } from "../features/Settings/PauseToken";
 
 const Settings: NextPage = () => {
@@ -45,7 +45,7 @@ const Settings: NextPage = () => {
           </div>
           <div className="w-full flex flex-col items-center justify-center gap-4 max-w-[566px]">
             <PauseToken />
-            <ChangeFee />
+            <ManageFees />
           </div>
         </>
       )}
