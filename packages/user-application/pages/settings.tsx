@@ -5,7 +5,7 @@ import { CgSpinnerAlt } from "react-icons/cg";
 import { ManageStudents } from "../features/Settings/ManageStudents";
 import { ManageTeachers } from "../features/Settings/ManageTeachers";
 import { ManageFees } from "../features/Settings/ManageFees";
-import { PauseToken } from "../features/Settings/PauseToken";
+import { ManageTokenPause } from "../features/Settings/ManageTokenPause";
 
 const Settings: NextPage = () => {
   const [showSpinner, setShowSpinner] = useState<boolean>(true);
@@ -44,7 +44,7 @@ const Settings: NextPage = () => {
             <ManageTeachers />
           </div>
           <div className="w-full flex flex-col items-center justify-center gap-4 max-w-[566px]">
-            <PauseToken />
+            <ManageTokenPause />
             <ManageFees />
           </div>
         </>
