@@ -27,7 +27,9 @@ export const Footer = () => {
   ];
 
   return (
-    <Bar>
+    <Bar
+      isHeader={false}
+    >
       <div className="flex flex-row items-center gap-4 text-white">
         {LeftData.map((item, index) => (
           <p

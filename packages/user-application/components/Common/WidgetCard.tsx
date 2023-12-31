@@ -12,7 +12,7 @@ export const WidgetCard = ({
       <p className="text-base font-bold text-black">
         {title}
       </p>
-      <div className="w-full flex flex-col items-center justify-center gap-4 p-8 rounded-2xl border-2 border-blue-600">
+      <div className="w-full flex flex-col items-center justify-center gap-4 p-8 rounded-xl border-2 border-blue-600">
         {children}
       </div>
     </div>

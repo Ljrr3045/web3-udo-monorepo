@@ -5,6 +5,7 @@ import { CgMenu } from "react-icons/cg";
 import { useAccount } from "wagmi";
 import { toast } from "react-toastify";
 import { useDataGetter } from "./Hooks/useDataGetter";
+import { SideMenu } from "./SideMenu";
 
 export const Header = () => {
   const [showMoreOptions, setShowMoreOptions] = useState<boolean>(false);
@@ -18,12 +19,14 @@ export const Header = () => {
   }, [isConnected]);
 
   return (
-    <Bar>
+    <Bar
+      isHeader={true}
+    >
       <UdoLogo />
       {showMoreOptions && (
         <>
           <UserBalance />
-          <SideMenu />
+          <MainSideMenu />
         </>
       )}
     </Bar>
@@ -60,12 +63,26 @@ const UserBalance = () => {
   );
 }
 
-const SideMenu = () => {
+const MainSideMenu = () => {
+  const [openSideMenu, setOpenSideMenu] = useState<boolean>(false);
+
+  const handleCloseAndOpen = () => {
+    setOpenSideMenu(!openSideMenu)
+  }
+
   return (
-    <CgMenu
-      size={30}
-      className="cursor-pointer"
-    />
+    <>
+      <CgMenu
+        size={30}
+        className="cursor-pointer"
+        onClick={handleCloseAndOpen}
+      />
+      {openSideMenu && (
+        <SideMenu
+          onClose={handleCloseAndOpen}
+        />
+      )}
+    </>
   );
 }
 
