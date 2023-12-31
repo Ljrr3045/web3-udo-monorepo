@@ -12,8 +12,11 @@
     },
     "scripts": {
         "bootstrap": "npm install && npm run install:pkgs",
-        "clean": "lerna exec rm -- -rf node_modules",
         "install:pkgs": "lerna exec npm install -- --also=dev",
+        "dev:app": "npm run --workspace packages/user-application dev",
+        "build:app": "npm run --workspace packages/user-application build",
+        "start:app": "npm run --workspace packages/user-application start",
+        "lint:app": "npm run --workspace packages/user-application lint",
         "build:smart-contracts": "npm run --workspace packages/smart-contracts compile",
         "test:smart-contracts": "npm run --workspace packages/smart-contracts test",
         "coverage:smart-contracts": "npm run --workspace packages/smart-contracts coverage",
