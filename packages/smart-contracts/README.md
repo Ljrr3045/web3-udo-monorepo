@@ -1,15 +1,3 @@
-# Universidad de Oriente Token - UDOT
-
-<div align="center">
-    <img 
-        src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Logo_UDO.svg/1200px-Logo_UDO.svg.png"
-        width="200"
-    />
-</div>
-
-
-This project was created under the idea of designing a decentralized and autonomous payment system, with which it is sought to serve as an economic and financial refuge for the "Universidad de Oriente Token". The main mission of this project is to allow the university to manage its funds autonomously.
-
 ## Token Characteristics
 
 - Maximum Supplement: 1.000.000 UDOT
