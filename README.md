@@ -1,18 +1,9 @@
 <div align="center">
 
-```
-
-
-██████╗░██╗░░░░░░█████╗░░█████╗░░██████╗
-██╔══██╗██║░░░░░██╔══██╗██╔══██╗██╔════╝
-██║░░██║██║░░░░░██║░░██║██║░░╚═╝╚█████╗░
-██║░░██║██║░░░░░██║░░██║██║░░██╗░╚═══██╗
-██████╔╝███████╗╚█████╔╝╚█████╔╝██████╔╝
-╚═════╝░╚══════╝░╚════╝░░╚════╝░╚═════╝░  
-
-
-
-```
+<img 
+    src="https://drive.google.com/file/d/1hJ3KBH6qLWeI7hCcojhmDe86tN-8SaSO/view?usp=sharing"
+    width="200"
+/>
 
 A Web3 project of the [**University of Oriente**](https://x.com/dacemonagas).
 
