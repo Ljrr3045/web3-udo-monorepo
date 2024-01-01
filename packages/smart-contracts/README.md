@@ -49,7 +49,7 @@ npm run coverage
 # Run Deploy (Local Network)
 npm run deploy:local
 
-# Run deploy (Testnet Network)
+# Run Deploy (Testnet Network)
 npm run deploy:testnet
 
 # Generate Documentation
