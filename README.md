@@ -11,7 +11,7 @@ A Web3 project of the [**University of Oriente**](https://x.com/dacemonagas).
 
 # Universidad de Oriente Token - UDOT
 
-This project was created under the idea of designing a decentralized and autonomous payment system, with which it is sought to serve as an economic and financial refuge for the "Universidad de Oriente Token". The main mission of this project is to allow the university to manage its funds autonomously.
+This project was created under the idea of designing a decentralized and autonomous payment system, with which it is sought to serve as an economic and financial refuge for the "Universidad de Oriente". The main mission of this project is to allow the university to manage its funds autonomously.
 
 ## Scope
 
