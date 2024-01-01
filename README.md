@@ -1,7 +1,7 @@
 <div align="center">
 
 <img 
-    src="https://drive.google.com/file/d/1hJ3KBH6qLWeI7hCcojhmDe86tN-8SaSO/view?usp=sharing"
+    src="https://i.ibb.co/2v2kq5q/udot-logo.png"
     width="200"
 />
 
