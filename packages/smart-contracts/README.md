@@ -1,4 +1,4 @@
-# smart Contracts
+# Smart Contracts
 
 In this section you can find everything related to the development of the smart contracts linked to the UDOT project.
 
