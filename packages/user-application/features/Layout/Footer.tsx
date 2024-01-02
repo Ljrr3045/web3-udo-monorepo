@@ -6,7 +6,7 @@ export const Footer = () => {
     {
       text: "University of Oriente, 2024",
       onclick: () => {
-        window.open("https://x.com/dacemonagas?s=20", "_blank");
+        window.open("https://x.com/dacemonagas", "_blank");
       }
     }
   ];

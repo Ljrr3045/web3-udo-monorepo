@@ -1,4 +1,6 @@
-This is a [RainbowKit](https://rainbowkit.com) + [wagmi](https://wagmi.sh) + [Next.js](https://nextjs.org/) project bootstrapped with [`create-rainbowkit`](https://github.com/rainbow-me/rainbowkit/tree/main/packages/create-rainbowkit).
+# User Application
+
+In this section you can find everything related to the development of the web app linked to the UDOT project.
 
 ## Getting Started
 
@@ -10,20 +12,30 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## Technologies
 
-## Learn More
+This project uses the following technologies:
+- [RainbowKit](https://rainbowkit.com)
+- [Wagmi](https://wagmi.sh)
+- [React](https://react.dev/)
+- [Next.js](https://nextjs.org/docs)
+- [Tailwind CSS](https://tailwindcss.com/docs)
+- [TypeScript](https://www.typescriptlang.org/docs)
 
-To learn more about this stack, take a look at the following resources:
+### Notes
 
-- [RainbowKit Documentation](https://rainbowkit.com) - Learn how to customize your wallet connection flow.
-- [wagmi Documentation](https://wagmi.sh) - Learn how to interact with Ethereum.
-- [Next.js Documentation](https://nextjs.org/docs) - Learn how to build a Next.js application.
+- The project is hosted on the [Vercel](https://vercel.com/docs) platform.
+- This project uses a custom [Subgraph](https://github.com/Ljrr3045/web3-udo-subgraphs) of the UDOT project to read some data, this subgraph is hosted on [The Graph](https://thegraph.com/docs/en/) platform.
 
-You can check out [the RainbowKit GitHub repository](https://github.com/rainbow-me/rainbowkit) - your feedback and contributions are welcome!
+## Useful Commands
 
-## Deploy on Vercel
+```
+# Run User Application Locally
+npm run dev
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+# Run User Application Build
+npm run build
 
-Check out the [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+# Run User Application Lint
+npm run lint
+```
