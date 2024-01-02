@@ -21,11 +21,10 @@ This project uses the following technologies:
 - [Next.js](https://nextjs.org/docs)
 - [Tailwind CSS](https://tailwindcss.com/docs)
 - [TypeScript](https://www.typescriptlang.org/docs)
-- [Vercel](https://vercel.com/docs)
 
 ### Notes
 
-- The project is hosted on the Vercel platform.
+- The project is hosted on the [Vercel](https://vercel.com/docs) platform.
 - This project uses a custom [Subgraph](https://github.com/Ljrr3045/web3-udo-subgraphs) of the UDOT project to read some data, this subgraph is hosted on [The Graph](https://thegraph.com/docs/en/) platform.
 
 ## Useful Commands
