@@ -60,7 +60,7 @@ npm run deploy-testnet:smart-contracts
 # Run User Application Locally
 npm run dev:app
 
-# Run Build User Application
+# Run User Application Build
 npm run build:app
 
 # Run User Application Lint

@@ -33,7 +33,7 @@ This project uses the following technologies:
 # Run User Application Locally
 npm run dev
 
-# Run Build User Application
+# Run User Application Build
 npm run build
 
 # Run User Application Lint
