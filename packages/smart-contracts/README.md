@@ -1,3 +1,7 @@
+# smart Contracts
+
+In this section you can find everything related to the development of the smart contracts linked to the UDOT project.
+
 ## Token Characteristics
 
 - Maximum Supplement: 1.000.000 UDOT
@@ -5,6 +9,7 @@
 - Contract Address: 0x25dcD86B0948703b7Ced7BD531BE723e86daFCDF
 
 ### Use Cases
+
 The UDOT token is an ERC20 utility token. This can can be used as a digital currency. The main real uses that it could have are:
 
 - Create reserve of university funds
