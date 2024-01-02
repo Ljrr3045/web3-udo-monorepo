@@ -42,7 +42,7 @@ You can verify the contract in the Mumbai testnet network at the following link:
 ## Useful Commands
 
 ```
-# Compile Contracts
+# Run Build
 npm run compile
 
 # Run Tests
@@ -57,6 +57,6 @@ npm run deploy:local
 # Run Deploy (Testnet Network)
 npm run deploy:testnet
 
-# Generate Documentation
+# Run Generate Documentation
 npm run docgen
 ```

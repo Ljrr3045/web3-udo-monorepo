@@ -42,7 +42,7 @@ This will install all packages in the monorepo as well as all the packages.
 ## Useful Commands
 
 ```
-# Build Smart Contracts
+# Run Smart Contracts Build
 npm run build:smart-contracts
 
 # Run Smart Contracts Tests
