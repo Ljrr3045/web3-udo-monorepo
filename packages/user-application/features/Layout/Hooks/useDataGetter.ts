@@ -1,6 +1,6 @@
 import UDOT_ABI from "../../../utils/ABIs/UDOT.json";
-import { useAccount, useBalance, useContractRead } from "wagmi";
 import { UDOTAddress } from "../../../utils/Constants";
+import { useAccount, useBalance, useContractRead } from "wagmi";
 
 export const useDataGetter = () => {
   const { address } = useAccount();
