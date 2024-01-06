@@ -12,9 +12,7 @@ export const VoteBlocked = () => {
       <div className="w-full flex flex-col items-center justify-center gap-2">
         <CgSmileSad size={100} className="text-blue-600" />
         <p className="text-base font-normal text-black text-center">
-          <b>{`Sorry...`}</b>
-          {` your balance is not enough to be able to vote, `}
-          <b>{`you must have at least 1 UDOT in your wallet.`}</b>
+          {`Sorry... your balance is not enough to be able to vote, you must have at least 1 UDOT in your wallet.`}
         </p>
       </div>
       <Button
