@@ -64,7 +64,7 @@ export const Sell = () => {
           width={25}
           height={25}
         />
-        <p className="text-sm font-normal text-black text-start">
+        <p className="text-sm font-normal text-black text-start zero:max-w-[260px] 2md:max-w-none">
           {`Sell your UDOT and receive Polygon's native currency (MATIC) in exchange.`}
         </p>
       </div>

@@ -62,7 +62,7 @@ export const Buy = () => {
           width={25}
           height={25}
         />
-        <p className="text-sm font-normal text-black text-start">
+        <p className="text-sm font-normal text-black text-start zero:max-w-[260px] 2md:max-w-none">
           {`Buy UDOT token using the Polygon's Native Currency (MATIC).`}
         </p>
       </div>

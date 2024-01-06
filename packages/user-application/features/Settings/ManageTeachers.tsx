@@ -19,7 +19,7 @@ export const ManageTeachers = () => {
           size={25}
           color="#2563eb"
         />
-        <p className="text-sm font-normal text-black text-start">
+        <p className="text-sm font-normal text-black text-start zero:max-w-[260px] 2md:max-w-none">
           {`Add or remove teachers from the beneficiary list.`}
         </p>
       </div>

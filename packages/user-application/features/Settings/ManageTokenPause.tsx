@@ -26,7 +26,7 @@ export const ManageTokenPause = () => {
           size={25}
           color="#2563eb"
         />
-        <p className="text-sm font-normal text-black text-start">
+        <p className="text-sm font-normal text-black text-start zero:max-w-[260px] 2md:max-w-none">
           {`Set whether transactions are paused or active.`}
         </p>
       </div>
