@@ -80,7 +80,7 @@ const MainSideMenu = () => {
     <>
       <CgMenu
         size={30}
-        className="cursor-pointer"
+        className="cursor-pointer text-white"
         onClick={handleCloseAndOpen}
       />
       {openSideMenu && (

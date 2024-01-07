@@ -17,9 +17,9 @@ export const ManageStudents = () => {
       <div className="w-full flex flex-row items-center justify-start gap-2">
         <CgArrowRightR
           size={25}
-          color="#2563eb"
+          className="text-blue-600"
         />
-        <p className="text-sm font-normal text-black text-start">
+        <p className="text-sm font-normal text-black text-start zero:max-w-[260px] 2md:max-w-none">
           {`Add or remove students from the beneficiary list.`}
         </p>
       </div>

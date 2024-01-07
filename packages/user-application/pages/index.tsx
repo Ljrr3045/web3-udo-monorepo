@@ -22,7 +22,7 @@ const Home: NextPage = () => {
       {(isConnecting || isConnected) && (
         <CgSpinnerAlt
           size={50}
-          className="loading-icon"
+          className="loading-icon text-blue-600"
         />
       )}
       {(!isConnecting && !isConnected) && (

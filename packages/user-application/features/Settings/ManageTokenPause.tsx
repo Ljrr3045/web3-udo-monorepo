@@ -24,9 +24,9 @@ export const ManageTokenPause = () => {
       <div className="w-full flex flex-row items-center justify-start gap-2">
         <CgCheckR
           size={25}
-          color="#2563eb"
+          className="text-blue-600"
         />
-        <p className="text-sm font-normal text-black text-start">
+        <p className="text-sm font-normal text-black text-start zero:max-w-[260px] 2md:max-w-none">
           {`Set whether transactions are paused or active.`}
         </p>
       </div>

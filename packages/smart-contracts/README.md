@@ -6,7 +6,7 @@ In this section you can find everything related to the development of the smart 
 
 - Maximum Supplement: 1.000.000 UDOT
 - Used Network: Mumbai Testnet
-- Contract Address: 0x25dcD86B0948703b7Ced7BD531BE723e86daFCDF
+- Contract Address: 0x63ce92B6F52ee484de3E860956efcddD7577Df3b
 
 ### Use Cases
 
@@ -37,7 +37,7 @@ The information on smart contracts can be found at the following link:
 * [Documentation](https://github.com/Ljrr3045/web3-udo-monorepo/blob/master/packages/smart-contracts/docs/index.md)
 
 You can verify the contract in the Mumbai testnet network at the following link:
-* [Contract Verified](https://mumbai.polygonscan.com/address/0x25dcD86B0948703b7Ced7BD531BE723e86daFCDF)
+* [Contract Verified](https://mumbai.polygonscan.com/address/0x63ce92B6F52ee484de3E860956efcddD7577Df3b)
 
 ## Useful Commands
 

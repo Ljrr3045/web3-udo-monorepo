@@ -42,7 +42,7 @@ contract FundManager is UDOT {
     event RemoveStudentWallet(address _wallet);
     event ChangeKeeperSystem(address _newKeeperSystem, address _oldKeeperSystem);
     event VoteForDestination(address _wallet, FundsDestination _destination, uint256 _date);
-    event DistributeRewards(FundsDestination _destination, uint256 _amountDistributed, uint256 _date);
+    event DistributeReward(FundsDestination _destination, uint256 _amountDistributed, uint256 _date);
     event VotesValidation(uint256 _votesForUniversity, uint256 _votesForTeachers, uint256 _votesForStudents, uint256 _resetDate, bool _isDistributed);
 
 //Modifiers
@@ -130,7 +130,7 @@ contract FundManager is UDOT {
     */
     function votesValidation() external onlyKeeperSystem isVotesEnded whenNotPaused {
         if (_getTotalFundsRaised() >= MINIMUM_AMOUNT_TO_DISTRIBUTE) {
-            _distributeRewards(_getTotalFundsRaised(), _getDestinationWithMoreVotes());
+            _distributeReward(_getTotalFundsRaised(), _getDestinationWithMoreVotes());
             lastFundsDestination = _getDestinationWithMoreVotes();
         }
 
@@ -369,7 +369,7 @@ contract FundManager is UDOT {
      * @param _totalFundsRaised The total amount of funds raised
      * @param _fundsDestination The destination of the funds
     */
-    function _distributeRewards(uint256 _totalFundsRaised, FundsDestination _fundsDestination) internal {
+    function _distributeReward(uint256 _totalFundsRaised, FundsDestination _fundsDestination) internal {
         if (_fundsDestination == FundsDestination.Teachers) {
             uint256 _totalTeachersWallets = teachersWallets.length;
             uint256 _amountToDistribute = _totalFundsRaised / _totalTeachersWallets;
@@ -388,7 +388,7 @@ contract FundManager is UDOT {
             super._update(address(this), udoWallet, _totalFundsRaised);
         }
 
-        emit DistributeRewards(_fundsDestination, _totalFundsRaised, block.timestamp);
+        emit DistributeReward(_fundsDestination, _totalFundsRaised, block.timestamp);
     }
 }
 
