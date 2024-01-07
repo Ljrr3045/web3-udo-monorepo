@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from "react";
+import ConfettiExplosion from "react-confetti-explosion";
 import { WidgetCard } from "../../components/Common/WidgetCard";
-import { CgArrowRightR, CgSmile } from "react-icons/cg";
+import { CgArrowRightR, CgSmile, CgSpinnerAlt } from "react-icons/cg";
 import { RadioButtonGroup } from "../../components/Common/RadioButtonGroup";
 import { Button } from "../../components/Common/Button";
 import { useVote } from "./Hooks/useVote";
 
 export const VoteSelector = () => {
   const [showVoteOption, setShowVoteOption] = useState<boolean>(false);
-  const { isWalletAlreadyVoted } = useVote({});
+  const [showSpinner, setShowSpinner] = useState<boolean>(true);
+  const { isWalletAlreadyVoted, isWalletAlreadyVotedLoading } = useVote({});
 
+/* Effects */
   useEffect(() => {
     if (isWalletAlreadyVoted) {
       setShowVoteOption(false);
@@ -17,14 +20,28 @@ export const VoteSelector = () => {
     }
   }, [isWalletAlreadyVoted]);
 
+  useEffect(() => {
+    if (isWalletAlreadyVotedLoading) {
+      setShowSpinner(true);
+    } else {
+      setShowSpinner(false);
+    }
+  }, [isWalletAlreadyVotedLoading]);
+
   return (
     <WidgetCard
       title="Vote"
     >
-      {!showVoteOption && (
+      {(showSpinner) && (
+        <CgSpinnerAlt
+          size={50}
+          className="loading-icon text-blue-600"
+        />
+      )}
+      {(!showVoteOption && !showSpinner) && (
         <UserAlreadyVoted />
       )}
-      {showVoteOption && (
+      {(showVoteOption && !showSpinner) && (
         <UserNotVoted />
       )}
     </WidgetCard>
@@ -36,12 +53,12 @@ const UserNotVoted = () => {
   const [selectedOption, setSelectedOption] = useState<string>("0");
   const { sendTransaction } = useVote({ value: selectedOption });
 
-/* Handlers */
+  /* Handlers */
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedOption(event.target.value);
   };
 
-/* Options */
+  /* Options */
   const optionsToVote = [
     {
       value: "0",
@@ -82,16 +99,46 @@ const UserNotVoted = () => {
 }
 
 const UserAlreadyVoted = () => {
+  const [isExploding, setIsExploding] = useState<boolean>(false);
+
+  /* Handlers */
+  const handleClick = () => {
+    setIsExploding(true);
+  };
+
+  /* Effects */
+  useEffect(() => {
+    if (isExploding) {
+      setTimeout(() => {
+        setIsExploding(false);
+      }, 2200);
+    }
+  }, [isExploding]);
+
   return (
     <>
-      <div className="w-full flex flex-col items-center justify-start gap-2">
-        <CgSmile
-          size={100}
-          className="text-blue-600"
+      <div className="w-full flex flex-col items-center justify-start gap-4">
+        {isExploding && (
+          <ConfettiExplosion
+            className="fixed inset-0 w-full min-h-screen"
+            width={5000}
+            height={5000}
+            particleCount={300}
+          />
+        )}
+        <div className="w-full flex flex-col items-center justify-start gap-1">
+          <CgSmile
+            size={100}
+            className="text-blue-600"
+          />
+          <p className="text-base font-bold text-black text-center">
+            {`You already voted this month`}
+          </p>
+        </div>
+        <Button
+          text="Thank You!"
+          onClick={handleClick}
         />
-        <p className="text-normal font-bold text-black text-start zero:max-w-[260px] 2md:max-w-none">
-          {`You already voted this month, thank you!`}
-        </p>
       </div>
     </>
   );

@@ -20,7 +20,7 @@ export const useVote = ({
   const voteOption = ethers.toBigInt(value ?? "0");
 
 /* Get blockchain data */
-  const { data: isWalletAlreadyVoted } = useContractRead({
+  const { data: isWalletAlreadyVoted, isLoading: isWalletAlreadyVotedLoading } = useContractRead({
     address: UDOTAddress,
     abi: UDOT_ABI,
     functionName: "isWalletAlreadyVoted",
@@ -66,7 +66,8 @@ export const useVote = ({
     }, [isError]);
 
   return {
-    isWalletAlreadyVoted,
     sendTransaction,
+    isWalletAlreadyVoted,
+    isWalletAlreadyVotedLoading,
   };
 }
