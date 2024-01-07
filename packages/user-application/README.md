@@ -27,6 +27,11 @@ This project uses the following technologies:
 - The project is hosted on the [Vercel](https://vercel.com/docs) platform.
 - This project uses a custom [Subgraph](https://github.com/Ljrr3045/web3-udo-subgraphs) of the UDOT project to read some data, this subgraph is hosted on [The Graph](https://thegraph.com/docs/en/) platform.
 
+## Links
+
+You can view the web-app deployed in vercel in the following link:
+* [UDOT Web-App](https://udot-project.vercel.app/)
+
 ## Useful Commands
 
 ```
