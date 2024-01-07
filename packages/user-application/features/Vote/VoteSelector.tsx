@@ -1,12 +1,47 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { WidgetCard } from "../../components/Common/WidgetCard";
-import { CgArrowRightR } from "react-icons/cg";
+import { CgArrowRightR, CgSmile } from "react-icons/cg";
 import { RadioButtonGroup } from "../../components/Common/RadioButtonGroup";
 import { Button } from "../../components/Common/Button";
+import { useVote } from "./Hooks/useVote";
 
 export const VoteSelector = () => {
-  const [selectedOption, setSelectedOption] = useState("0");
+  const [showVoteOption, setShowVoteOption] = useState<boolean>(false);
+  const { isWalletAlreadyVoted } = useVote({});
 
+  useEffect(() => {
+    if (isWalletAlreadyVoted) {
+      setShowVoteOption(false);
+    } else {
+      setShowVoteOption(true);
+    }
+  }, [isWalletAlreadyVoted]);
+
+  return (
+    <WidgetCard
+      title="Vote"
+    >
+      {!showVoteOption && (
+        <UserAlreadyVoted />
+      )}
+      {showVoteOption && (
+        <UserNotVoted />
+      )}
+    </WidgetCard>
+  );
+}
+
+/* Internal components */
+const UserNotVoted = () => {
+  const [selectedOption, setSelectedOption] = useState<string>("0");
+  const { sendTransaction } = useVote({ value: selectedOption });
+
+/* Handlers */
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSelectedOption(event.target.value);
+  };
+
+/* Options */
   const optionsToVote = [
     {
       value: "0",
@@ -22,18 +57,12 @@ export const VoteSelector = () => {
     }
   ];
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSelectedOption(event.target.value);
-  };
-
   return (
-    <WidgetCard
-      title="Vote"
-    >
+    <>
       <div className="w-full flex flex-row items-center justify-start gap-2">
         <CgArrowRightR
           size={25}
-          color="#2563eb"
+          className="text-blue-600"
         />
         <p className="text-sm font-normal text-black text-start zero:max-w-[260px] 2md:max-w-none">
           {`Which sector of the University of de Oriente do you want to receive funds this month?`}
@@ -46,8 +75,24 @@ export const VoteSelector = () => {
       />
       <Button
         text="Send Vote"
-        onClick={() => console.log("Send bote")}
+        onClick={sendTransaction}
       />
-    </WidgetCard>
+    </>
+  );
+}
+
+const UserAlreadyVoted = () => {
+  return (
+    <>
+      <div className="w-full flex flex-col items-center justify-start gap-2">
+        <CgSmile
+          size={100}
+          className="text-blue-600"
+        />
+        <p className="text-normal font-bold text-black text-start zero:max-w-[260px] 2md:max-w-none">
+          {`You already voted this month, thank you!`}
+        </p>
+      </div>
+    </>
   );
 }

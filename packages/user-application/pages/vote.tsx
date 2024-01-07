@@ -32,7 +32,7 @@ const Vote: NextPage = () => {
       {(waitingBlockchainData) && (
         <CgSpinnerAlt
           size={50}
-          className="loading-icon"
+          className="loading-icon text-blue-600"
         />
       )}
       {(!isVoteEnabled && !waitingBlockchainData) && (

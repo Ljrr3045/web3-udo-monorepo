@@ -32,7 +32,7 @@ export const Receive = () => {
       {!showQR && (
         <CgSpinnerAlt
           size={32}
-          className="loading-icon"
+          className="loading-icon text-blue-600"
         />
       )}
       {showQR && (

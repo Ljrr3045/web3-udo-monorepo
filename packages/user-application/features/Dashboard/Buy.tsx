@@ -69,7 +69,7 @@ export const Buy = () => {
       {!showInput && (
         <CgSpinnerAlt
           size={32}
-          className="loading-icon"
+          className="loading-icon text-blue-600"
         />
       )}
       {showInput && (
