@@ -10,6 +10,7 @@ export default function Document() {
           name="University of Oriente - UDOT"
         />
         <link href="/favicon.ico" rel="icon" />
+        <link rel="manifest" href="/manifest.json" />
         <Script
           src="/assets/scripts/lang-config.js"
           strategy="beforeInteractive"
