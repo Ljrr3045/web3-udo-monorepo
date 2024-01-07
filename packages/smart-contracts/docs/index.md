@@ -124,10 +124,10 @@ event ChangeKeeperSystem(address _newKeeperSystem, address _oldKeeperSystem)
 event VoteForDestination(address _wallet, enum FundManager.FundsDestination _destination, uint256 _date)
 ```
 
-### DistributeRewards
+### DistributeReward
 
 ```solidity
-event DistributeRewards(enum FundManager.FundsDestination _destination, uint256 _amountDistributed, uint256 _date)
+event DistributeReward(enum FundManager.FundsDestination _destination, uint256 _amountDistributed, uint256 _date)
 ```
 
 ### VotesValidation
@@ -454,10 +454,10 @@ function _getDestinationWithMoreVotes() internal view returns (enum FundManager.
 
 Allows to get the destination with more votes
 
-### _distributeRewards
+### _distributeReward
 
 ```solidity
-function _distributeRewards(uint256 _totalFundsRaised, enum FundManager.FundsDestination _fundsDestination) internal
+function _distributeReward(uint256 _totalFundsRaised, enum FundManager.FundsDestination _fundsDestination) internal
 ```
 
 Allows to distribute the rewards
