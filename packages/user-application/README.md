@@ -29,7 +29,7 @@ This project uses the following technologies:
 
 ## Links
 
-You can view the web-app deployed in vercel in the following link:
+You can try the web-app deployed in Vercel in the following link:
 * [UDOT Web-App](https://udot-project.vercel.app/)
 
 ## Useful Commands
