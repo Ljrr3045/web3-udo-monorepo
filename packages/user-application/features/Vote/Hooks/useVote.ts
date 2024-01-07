@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { ethers } from "ethers";
 import { toast } from "react-toastify";
 import {
-    useAccount,
+  useAccount,
   useContractRead,
   useContractWrite,
   usePrepareContractWrite,
