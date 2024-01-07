@@ -132,7 +132,7 @@ const UserAlreadyVoted = () => {
             className="text-blue-600"
           />
           <p className="text-base font-bold text-black text-center">
-            {`You already voted this month`}
+            {`You already voted this month.`}
           </p>
         </div>
         <Button
