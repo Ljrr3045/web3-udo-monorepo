@@ -4,13 +4,13 @@ import { gql, GraphQLClient } from "graphql-request";
 import { useBalance, useContractRead } from "wagmi";
 
 /* Types */
-type TDataDistributeRewards = {
+export type TDataDistributeRewards = {
   _amountDistributed: string,
   _date: string,
   _destination: number
 };
 
-type TDistributeRewards = {
+export type TDistributeRewards = {
   distributeRewards: TDataDistributeRewards[]
 };
 

@@ -21,7 +21,7 @@ export const Footer = () => {
     {
         text: "Contract",
         onclick: () => {
-          window.open("https://mumbai.polygonscan.com/address/0x25dcD86B0948703b7Ced7BD531BE723e86daFCDF", "_blank");
+          window.open("https://mumbai.polygonscan.com/address/0x63ce92B6F52ee484de3E860956efcddD7577Df3b", "_blank");
         }
       }
   ];
