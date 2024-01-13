@@ -2,6 +2,7 @@ import UDOT_ABI from "../../../utils/ABIs/UDOT.json";
 import { SubgraphURL, UDOTAddress } from "../../../utils/Constants";
 import { gql, GraphQLClient } from "graphql-request";
 import { useBalance, useContractRead } from "wagmi";
+import { useEffect, useState } from "react";
 
 /* Types */
 export type TDataDistributeRewards = {
@@ -16,7 +17,7 @@ export type TDistributeRewards = {
 
 /* Hooks */
 export const useInfoGetter = () => {
-  let distributeRewardsData: TDataDistributeRewards[] = [];
+  const [distributeRewardsData, setDistributeRewardsData] = useState<TDataDistributeRewards[]>([]);
 
   /* Get blockchain data */
   const { data: contractBalance } = useBalance({
@@ -47,9 +48,11 @@ export const useInfoGetter = () => {
     return results.distributeRewards;
   };
 
-  getDistributeRewards().then((res) => {
-    distributeRewardsData = res;
-  });
+  useEffect(() => {
+    getDistributeRewards().then((res) => {
+      setDistributeRewardsData(res);
+    });
+  }, []);
 
   return {
     distributeRewardsData,

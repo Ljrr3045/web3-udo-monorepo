@@ -1,6 +1,6 @@
 import React from "react";
 import { useRouter } from "next/router";
-import { CgClose, CgDesktop, CgOptions, CgPen } from "react-icons/cg";
+import { CgClose, CgDesktop, CgList, CgOptions, CgPen } from "react-icons/cg";
 import { Button } from "../../components/Common/Button";
 import { useAccount, useDisconnect } from "wagmi";
 import { useDataGetter } from "./Hooks/useDataGetter";
@@ -56,6 +56,14 @@ const NavigationOptions = ({
       icon: <CgDesktop size={32} className="text-blue-600" />,
       onClick: () => {
         router.push("/dashboard");
+        onClose();
+      },
+    },
+    {
+      title: "Transactions",
+      icon: <CgList size={32} className="text-blue-600" />,
+      onClick: () => {
+        router.push("/transactions");
         onClose();
       },
     },
