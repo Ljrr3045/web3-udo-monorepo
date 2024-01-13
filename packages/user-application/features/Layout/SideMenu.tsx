@@ -60,10 +60,10 @@ const NavigationOptions = ({
       },
     },
     {
-      title: "Transaction History",
+      title: "Transactions",
       icon: <CgList size={32} className="text-blue-600" />,
       onClick: () => {
-        router.push("/transactionHistory");
+        router.push("/transactions");
         onClose();
       },
     },

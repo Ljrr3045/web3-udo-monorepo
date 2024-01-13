@@ -4,7 +4,7 @@ import { BuyTx } from "../features/TransactionHistory/BuyTx";
 import { SellTx } from "../features/TransactionHistory/SellTx";
 import { TransferTx } from "../features/TransactionHistory/TransferTx";
 
-const TransactionHistory: NextPage = () => {
+const Transactions: NextPage = () => {
   return (
     <div className="w-full flex flex-wrap items-center justify-center gap-4">
       <div className="w-full flex flex-col items-center justify-center gap-4 max-w-[566px]">
@@ -18,4 +18,4 @@ const TransactionHistory: NextPage = () => {
   );
 }
 
-export default TransactionHistory;
+export default Transactions;
