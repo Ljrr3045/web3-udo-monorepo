@@ -21,7 +21,7 @@ export const BuyTx = () => {
               {`${new Date(parseInt(item.blockTimestamp) * 1000).toLocaleDateString()}`}
             </p>
             <p className="text-base font-bold text-black">
-              {`${item.to.slice(0, 10)}...${item.to.slice(-8)}`}
+              {`${item.to.slice(0, 6)}...${item.to.slice(-4)}`}
             </p>
             <p className="text-base font-bold text-black">
               {`${ethers.formatEther(item.value)} UDOT`}

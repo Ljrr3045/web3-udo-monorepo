@@ -3,46 +3,46 @@ import { SubgraphURL } from "../../../utils/Constants";
 import { gql, GraphQLClient } from "graphql-request";
 
 /* Types */
-export type TBuyTxInfo = {
-  to: string,
+export type TSellTxInfo = {
+  from: string,
   value: string,
   blockTimestamp: string
   transactionHash: string
 };
 
-export type TBuyTxData = {
-  transfers: TBuyTxInfo[]
+export type TSellTxData = {
+  transfers: TSellTxInfo[]
 };
 
 /* Hooks */
-export const useBuyTxGetter = () => {
-  const [buyTxData, setBuyTxData] = useState<TBuyTxInfo[]>([]);
+export const useSellTxGetter = () => {
+  const [sellTxData, setSellTxData] = useState<TSellTxInfo[]>([]);
 
   /* Get subgraph data */
-  const getBuyTxData = async () => {
+  const getSellTxData = async () => {
     const graphQLClient = new GraphQLClient(SubgraphURL, {});
     const query = gql`
       query MyQuery {
-        transfers(first: 5, where: {from: "0x0000000000000000000000000000000000000000"}) {
-          to
+        transfers(first: 5, where: {to: "0x0000000000000000000000000000000000000000"}) {
           value
           blockTimestamp
           transactionHash
+          from
         }
       }
     `;
 
-    const results = await graphQLClient.request(query) as TBuyTxData;
+    const results = await graphQLClient.request(query) as TSellTxData;
     return results.transfers;
   };
 
   useEffect(() => {
-    getBuyTxData().then((res) => {
-      setBuyTxData(res);
+    getSellTxData().then((res) => {
+      setSellTxData(res);
     });
   }, []);
 
   return {
-    buyTxData,
+    sellTxData,
   };
 }
