@@ -25,7 +25,7 @@ export const TransferTx = () => {
                 {`From: ${item.from.slice(0, 6)}...${item.from.slice(-4)}`}
               </p>
               <p className="text-base font-bold text-black">
-                {`To: ${item.from.slice(0, 6)}...${item.from.slice(-4)}`}
+                {`To: ${item.to.slice(0, 6)}...${item.to.slice(-4)}`}
               </p>
             </div>
             <p className="text-base font-bold text-black">
