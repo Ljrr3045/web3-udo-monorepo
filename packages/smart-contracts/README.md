@@ -5,8 +5,8 @@ In this section you can find everything related to the development of the smart 
 ## Token Characteristics
 
 - Maximum Supplement: 1.000.000 UDOT
-- Used Network: Mumbai Testnet
-- Contract Address: 0x63ce92B6F52ee484de3E860956efcddD7577Df3b
+- Used Network: Polygon Mainnet
+- Contract Address: 0x2969297cc328064D46e4D9FB6C632Daf4a927e59
 
 ### Use Cases
 
@@ -36,8 +36,8 @@ This project uses the following technologies and protocols:
 The information on smart contracts can be found at the following link:
 * [Documentation](https://github.com/Ljrr3045/web3-udo-monorepo/blob/master/packages/smart-contracts/docs/index.md)
 
-You can verify the contract in the Mumbai testnet network at the following link:
-* [Contract Verified](https://mumbai.polygonscan.com/address/0x63ce92B6F52ee484de3E860956efcddD7577Df3b)
+You can verify the contract in the Polygon Mainnet Scan at the following link:
+* [Contract Verified](https://polygonscan.com/address/0x2969297cc328064D46e4D9FB6C632Daf4a927e59#code)
 
 ## Useful Commands
 
@@ -54,8 +54,11 @@ npm run coverage
 # Run Deploy (Local Network)
 npm run deploy:local
 
-# Run Deploy (Testnet Network)
-npm run deploy:testnet
+# Run Deploy (Mainnet Network)
+npm run deploy:mainnet
+
+# Verify Contract (Mainnet Network)
+npm run verify:contract
 
 # Run Generate Documentation
 npm run docgen

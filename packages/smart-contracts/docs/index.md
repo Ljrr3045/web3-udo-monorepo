@@ -194,6 +194,14 @@ function getDestinationWithMoreVotes() external view returns (enum FundManager.F
 
 Allows to get the destination with more votes
 
+### checker
+
+```solidity
+function checker() external view returns (bool canExec, bytes memory execPayload)
+```
+
+Allows the keeper system to check if the contract can execute the votesValidation function.
+
 ### votesValidation
 
 ```solidity

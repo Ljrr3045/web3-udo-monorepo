@@ -23,8 +23,8 @@ const config: HardhatUserConfig = {
         blockNumber: 51478507,
       }
     },
-    mumbai: {
-      url: process.env.MUMBAI_URL ?? "",
+    polygonMainnet: {
+      url: process.env.POLYGON_MAINNET_URL ?? "",
       accounts:{
         mnemonic: process.env.MNEMONIC ?? "",
       },
@@ -33,7 +33,6 @@ const config: HardhatUserConfig = {
   etherscan: {
     apiKey: {
       polygon: process.env.POLYGONSCAN_API_KEY ?? "",
-      polygonMumbai: process.env.POLYGONSCAN_API_KEY ?? "",
     }
   },
   gasReporter: {

@@ -248,8 +248,11 @@ describe("FundManager", function () {
             expect(await fundManager.connect(owner).getWalletsAlreadyVotedLength()).to.equal(2);
 
             // Validate
-            await expect(fundManager.connect(keeperSystem).votesValidation()).to.be.revertedWith("FundManager: The votes are not finished yet");
+            const [canExec, execPayload] = await fundManager.connect(keeperSystem).checker();
+            expect(canExec).to.be.false;
+            expect(execPayload).to.not.equals("");
 
+            await expect(fundManager.connect(keeperSystem).votesValidation()).to.be.revertedWith("FundManager: The votes are not finished yet");
             expect(await fundManager.connect(owner).balanceOf(teacher.address)).to.equal(0);
             expect(await fundManager.connect(owner).balanceOf(student.address)).to.equal(0);
             expect(await fundManager.connect(owner).balanceOf(udoWallet.address)).to.equal(0);
@@ -283,6 +286,11 @@ describe("FundManager", function () {
 
             // Validate
             await time.increaseTo(nextVoteTime);
+
+            const [canExec, execPayload] = await fundManager.connect(keeperSystem).checker();
+            expect(canExec).to.be.false;
+            expect(execPayload).to.not.equals("");
+
             await fundManager.connect(keeperSystem).votesValidation();
 
             expect(await fundManager.connect(owner).votesForTeachers()).to.equal(0);
@@ -323,6 +331,11 @@ describe("FundManager", function () {
 
             // Validate
             await time.increaseTo(nextVoteTime);
+
+            const [canExec, execPayload] = await fundManager.connect(keeperSystem).checker();
+            expect(canExec).to.be.true;
+            expect(execPayload).to.not.equals("");
+
             await fundManager.connect(keeperSystem).votesValidation();
 
             expect(await fundManager.connect(owner).votesForTeachers()).to.equal(0);
@@ -363,6 +376,11 @@ describe("FundManager", function () {
 
             // Validate
             await time.increaseTo(nextVoteTime);
+
+            const [canExec, execPayload] = await fundManager.connect(keeperSystem).checker();
+            expect(canExec).to.be.true;
+            expect(execPayload).to.not.equals("");
+
             await fundManager.connect(keeperSystem).votesValidation();
 
             expect(await fundManager.connect(owner).votesForTeachers()).to.equal(0);
@@ -405,6 +423,11 @@ describe("FundManager", function () {
 
             // Validate
             await time.increaseTo(nextVoteTime);
+
+            const [canExec, execPayload] = await fundManager.connect(keeperSystem).checker();
+            expect(canExec).to.be.true;
+            expect(execPayload).to.not.equals("");
+
             await fundManager.connect(keeperSystem).votesValidation();
 
             expect(await fundManager.connect(owner).votesForTeachers()).to.equal(0);

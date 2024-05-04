@@ -5,6 +5,7 @@ import { gql, GraphQLClient } from "graphql-request";
 /* Types */
 export type TTransferTxInfo = {
   from: string,
+  to: string,
   value: string,
   blockTimestamp: string
   transactionHash: string

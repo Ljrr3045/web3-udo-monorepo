@@ -126,6 +126,17 @@ contract FundManager is UDOT {
 
 //Keeper Functions
     /**
+     * @notice Allows the keeper system to check if the contract can execute the votesValidation function.
+    */
+    function checker() external view returns (bool canExec, bytes memory execPayload) {
+        bool isVotesFinished = block.timestamp >= votesInit + VOTES_DURATION;
+        bool balanceToDistributeIsEnough = _getTotalFundsRaised() >= MINIMUM_AMOUNT_TO_DISTRIBUTE;
+
+        canExec = isVotesFinished && balanceToDistributeIsEnough;
+        execPayload = abi.encodeCall(this.votesValidation, ());
+    }
+
+    /**
      * @notice Allows the keeper system to update data of the contract, distribute rewards and reset the votes.
     */
     function votesValidation() external onlyKeeperSystem isVotesEnded whenNotPaused {
