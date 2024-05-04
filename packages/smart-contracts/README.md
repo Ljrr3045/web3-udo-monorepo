@@ -6,7 +6,7 @@ In this section you can find everything related to the development of the smart 
 
 - Maximum Supplement: 1.000.000 UDOT
 - Used Network: Polygon Mainnet
-- Contract Address: 0xaB39aB462358e5329BCF877e0d0b17F0E305290D
+- Contract Address: 0xd085264C3fe83d728568e390F36a62d2c725C690
 
 ### Use Cases
 
@@ -37,7 +37,7 @@ The information on smart contracts can be found at the following link:
 * [Documentation](https://github.com/Ljrr3045/web3-udo-monorepo/blob/master/packages/smart-contracts/docs/index.md)
 
 You can verify the contract in the Polygon Mainnet Scan at the following link:
-* [Contract Verified](https://polygonscan.com/address/0xaB39aB462358e5329BCF877e0d0b17F0E305290D#code)
+* [Contract Verified](https://polygonscan.com/address/0xd085264C3fe83d728568e390F36a62d2c725C690#code)
 
 ## Useful Commands
 

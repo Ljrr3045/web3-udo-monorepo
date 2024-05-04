@@ -22,7 +22,7 @@
     "coverage": "hardhat coverage",
     "deploy:local": "hardhat run --network hardhat scripts/deploy.ts",
     "deploy:mainnet": "hardhat run --network polygonMainnet scripts/deploy.ts",
-    "verify:contract": "hardhat verify --network polygonMainnet 0xaB39aB462358e5329BCF877e0d0b17F0E305290D 0xb615f402D84258039467316506441b238F5bA778 0xe11252624052043e95a31290fffc49f8801857b7",
+    "verify:contract": "hardhat verify --network polygonMainnet 0xd085264C3fe83d728568e390F36a62d2c725C690 0xb615f402D84258039467316506441b238F5bA778 0xe11252624052043e95a31290fffc49f8801857b7",
     "docgen": "hardhat docgen"
   }
 }
