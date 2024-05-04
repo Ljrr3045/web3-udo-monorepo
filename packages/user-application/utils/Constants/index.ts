@@ -1,3 +1,3 @@
 export const COOKIE_NAME = "googtrans";
-export const UDOTAddress = "0xaB39aB462358e5329BCF877e0d0b17F0E305290D";
-export const SubgraphURL = "https://api.studio.thegraph.com/query/25982/web3-udo-subgraph/0.0.2";
+export const UDOTAddress = "0x2969297cc328064D46e4D9FB6C632Daf4a927e59";
+export const SubgraphURL = "https://api.studio.thegraph.com/query/25982/web3-udot-subgraph/0.0.1";
