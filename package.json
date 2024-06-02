@@ -20,6 +20,6 @@
         "test:smart-contracts": "npm run --workspace packages/smart-contracts test",
         "coverage:smart-contracts": "npm run --workspace packages/smart-contracts coverage",
         "deploy-local:smart-contracts": "npm run --workspace packages/smart-contracts deploy:local",
-        "deploy-testnet:smart-contracts": "npm run --workspace packages/smart-contracts deploy:testnet"
+        "deploy-mainnet:smart-contracts": "npm run --workspace packages/smart-contracts deploy:mainnet"
     }
 }
