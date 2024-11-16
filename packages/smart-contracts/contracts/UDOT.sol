@@ -131,7 +131,7 @@ contract UDOT is ERC20, Ownable, Pausable, ReentrancyGuard {
     */
     function _update(address from, address to, uint256 amount) internal override whenNotPaused {
         uint256 _fee;
-        uint _finalAmount = amount;
+        uint256 _finalAmount = amount;
 
         if (from == address(0) || to == address(0)){
             super._update(from, to, _finalAmount);
