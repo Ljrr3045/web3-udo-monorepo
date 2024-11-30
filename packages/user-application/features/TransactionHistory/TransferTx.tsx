@@ -15,7 +15,7 @@ export const TransferTx = () => {
           <div
             key={index}
             className="w-full flex flex-row items-center justify-center gap-4 p-2 cursor-pointer rounded-xl border-2 border-blue-600"
-            onClick={() => window.open(`https://mumbai.polygonscan.com/tx/${item.transactionHash}`, "_blank")}
+            onClick={() => window.open(`https://polygonscan.com/tx/${item.transactionHash}`, "_blank")}
           >
             <p className="text-base font-bold text-blue-600">
               {`${new Date(parseInt(item.blockTimestamp) * 1000).toLocaleDateString()}`}
