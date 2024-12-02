@@ -24,7 +24,12 @@ export const useTransferTxGetter = () => {
     const graphQLClient = new GraphQLClient(SubgraphURL, {});
     const query = gql`
       query MyQuery {
-        transfers(first: 5, where: {to_not: "0x0000000000000000000000000000000000000000", from_not: "0x0000000000000000000000000000000000000000"}) {
+        transfers(
+          first: 5,
+          where: {to_not: "0x0000000000000000000000000000000000000000", from_not: "0x0000000000000000000000000000000000000000"}
+          orderBy: blockTimestamp
+          orderDirection: desc
+        ) {
           value
           blockTimestamp
           transactionHash

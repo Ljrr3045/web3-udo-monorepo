@@ -23,11 +23,16 @@ export const useBuyTxGetter = () => {
     const graphQLClient = new GraphQLClient(SubgraphURL, {});
     const query = gql`
       query MyQuery {
-        transfers(first: 5, where: {from: "0x0000000000000000000000000000000000000000"}) {
+        transfers(
+          first: 5,
+          where: {from: "0x0000000000000000000000000000000000000000"}
+          orderBy: blockTimestamp
+          orderDirection: desc
+        ) {
           to
           value
           blockTimestamp
-          transactionHash
+          transactionHash,
         }
       }
     `;

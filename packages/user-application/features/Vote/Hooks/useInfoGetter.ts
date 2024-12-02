@@ -36,7 +36,11 @@ export const useInfoGetter = () => {
     const graphQLClient = new GraphQLClient(SubgraphURL, {});
     const query = gql`
       query MyQuery {
-        distributeRewards(first: 5) {
+        distributeRewards(
+          first: 5
+          orderBy: blockTimestamp
+          orderDirection: desc
+        ) {
           _amountDistributed
           _date
           _destination
