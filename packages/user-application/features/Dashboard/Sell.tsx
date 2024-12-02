@@ -46,7 +46,7 @@ export const Sell = () => {
   }, [udotBalance]);
 
   useEffect(() => {
-    if (Number(amount) >= 0 && Number(amount) <= Number(udotBalance?.formatted)) {
+    if (Number(amount) === 0 || (Number(amount) > 0 && Number(amount) <= Number(udotBalance?.formatted))) {
       setIsValid(true);
     } else {
       setIsValid(false);
@@ -80,7 +80,7 @@ export const Sell = () => {
             amount={amount}
             onChange={handleChange}
             maxAmount={Number(currentBalance)}
-            isError={!isValid}
+            isError={Number(amount) !== 0 && !isValid}
             errorMessage="Invalid amount, please enter a correct amount."
             currentBalance={currentBalance}
             currencySymbol="UDOT"

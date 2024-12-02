@@ -44,7 +44,7 @@ export const Buy = () => {
   }, [maticBalance]);
 
   useEffect(() => {
-    if (Number(amount) >= 0 && Number(amount) <= Number(maticBalance?.formatted)) {
+    if (Number(amount) === 0 || (Number(amount) >= 0 && Number(amount) <= Number(maticBalance?.formatted))) {
       setIsValid(true);
     } else {
       setIsValid(false);
@@ -78,7 +78,7 @@ export const Buy = () => {
             amount={amount}
             onChange={handleChange}
             maxAmount={Number(currentBalance)}
-            isError={!isValid}
+            isError={Number(amount) !== 0 && !isValid}
             errorMessage="Invalid amount, please enter a correct amount."
             currentBalance={currentBalance}
             currencySymbol="MATIC"
