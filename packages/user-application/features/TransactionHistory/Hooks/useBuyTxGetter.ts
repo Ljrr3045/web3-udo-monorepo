@@ -17,6 +17,7 @@ export type TBuyTxData = {
 /* Hooks */
 export const useBuyTxGetter = () => {
   const [buyTxData, setBuyTxData] = useState<TBuyTxInfo[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   /* Get subgraph data */
   const getBuyTxData = async () => {
@@ -44,10 +45,12 @@ export const useBuyTxGetter = () => {
   useEffect(() => {
     getBuyTxData().then((res) => {
       setBuyTxData(res);
+      setIsLoading(false);
     });
   }, []);
 
   return {
     buyTxData,
+    isLoading,
   };
 }

@@ -17,6 +17,7 @@ export type TSellTxData = {
 /* Hooks */
 export const useSellTxGetter = () => {
   const [sellTxData, setSellTxData] = useState<TSellTxInfo[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   /* Get subgraph data */
   const getSellTxData = async () => {
@@ -44,10 +45,12 @@ export const useSellTxGetter = () => {
   useEffect(() => {
     getSellTxData().then((res) => {
       setSellTxData(res);
+      setIsLoading(false);
     });
   }, []);
 
   return {
     sellTxData,
+    isLoading,
   };
 }

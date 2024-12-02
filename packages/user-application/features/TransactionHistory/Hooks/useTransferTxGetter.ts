@@ -18,6 +18,7 @@ export type TTransferTxData = {
 /* Hooks */
 export const useTransferTxGetter = () => {
   const [transferTxData, setTransferTxData] = useState<TTransferTxInfo[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   /* Get subgraph data */
   const getTransferTxData = async () => {
@@ -46,10 +47,12 @@ export const useTransferTxGetter = () => {
   useEffect(() => {
     getTransferTxData().then((res) => {
       setTransferTxData(res);
+      setIsLoading(false);
     });
   }, []);
 
   return {
     transferTxData,
+    isLoading,
   };
 }
